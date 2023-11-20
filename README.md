@@ -8,6 +8,7 @@ Aplicación web y movil
 ## Authors
 
 - [@NicolasLeribleUMA](https://www.github.com/NicolasLeribleUMA)
+- [@firehellrain](https://www.github.com/firehellrain)
 
 
 ## Instalación
@@ -22,7 +23,7 @@ Ejecutar el módulo virtualenv
 ```
 Seleccionar el interprete de activate.bat (en Visual Studio Code)
 
-    [F1] -> Seleccionar interprete -> venvFiles
+    [F1] -> Seleccionar interprete -> .venv
 
 instalar librerías
 ```bash
