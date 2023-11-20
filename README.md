@@ -16,22 +16,17 @@ Instalar Python +v3.8
 
 Instalar Node JS +V16
 
-Instalar módulo para crear entornos virtuales
-
-```bash
-  pip install virtualenv
-```
 Ejecutar el módulo virtualenv
 ```bash
-  python -m venv
+  python -m venv .venv/
 ```
 Seleccionar el interprete de activate.bat (en Visual Studio Code)
 
     [F1] -> Seleccionar interprete -> venvFiles
 
-instalar django
+instalar librerías
 ```bash
-  pip install django
+  pip install -r requirements.txt
 ```
 ## Despliegue
 
