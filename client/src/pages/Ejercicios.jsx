@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/ventanaAdd.css'
 
 const listaDeEjercicios = [
   { nombre: 'Ejercicio 1', tipo: 'Cardio', privado: false },
@@ -18,13 +19,22 @@ export function Ejercicios() {
     setMostrarVentana(false);
   };
 
+{/* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/}
+{/* VENTANA DE VER EJERCICIO */}
+{/* MODIFICAR DE VER EJERCICIO */}
+{/* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/}
+{/* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */}
+{/* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/}
+
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <h2>Lista de Ejercicios</h2>
-        <button onClick={abrirVentana}>Abrir Ventana</button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
+        <h2>EJERCICIOS</h2>
+        <button onClick={abrirVentana}>Atrás</button>
+        <button onClick={abrirVentana}>Añadir ejercicio</button>
+        {/*HAY QUE HACER QUE VUELVA A HOME*/}
       </div>
-      <div>
+      <div style ={{textAlign: 'left', marginLeft: '40px'}}>
         <strong>Nombre</strong> | <strong>Tipo</strong> | <strong>Visibilidad</strong>
       </div>
       <ul>
@@ -49,16 +59,26 @@ export function Ejercicios() {
       {mostrarVentana && (
         <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
             <h3>Nuevo Ejercicio</h3>
-            <label>Nombre:</label>
-            <input type="text" />
-            <label>Tipo:</label>
-            <input type="text" />
-            <label>Link:</label>
-            <input type="text" />
-            <label>Descripcion:</label>
-            <input type="text" />
             <button onClick={cerrarVentana}>Cancelar</button>
+            </div>
+            <p>Nombre: <input type="text" /></p>
+            
+            <p>Tipo: <input type="text" /></p>
+            
+            <p>Link: <input type="text" /></p>
+            
+            <p>Descripcion: <input type="text" id="descripcion"/></p>
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+           
+            <label><input type= "checkbox" value = "Privado" /> Privado </label>
+            
+            <button onClick={cerrarVentana}>Confirmar</button>
+            {/* Este debería mostrar una ventana de ejercicio añadido y mostrarlo */}
+            </div>
           </div>
         </div>
       )}
