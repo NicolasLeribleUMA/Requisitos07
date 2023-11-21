@@ -35,9 +35,9 @@ export function Ejercicios() {
                 {ejercicio.nombre} | {ejercicio.tipo} | {ejercicio.privado ? 'Privado' : 'Público'}
               </div>
               <div style={{ display: 'inline-block' }}>
-                <button>Botón 1</button>
-                <button>Botón 2</button>
-                <button>Botón 3</button>
+                <button>Ver</button>
+                <button>Modificar</button>
+                <button>Borrar</button>
               </div>
             </div>
             <hr /> {/* Línea para separar visualmente los ejercicios */}
