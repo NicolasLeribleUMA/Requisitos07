@@ -6,15 +6,46 @@ export function Login() {
   const [password, setPassword] = useState('');
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Aquí puedes realizar la lógica de autenticación, por ejemplo, enviar los datos al servidor
     // Puedes agregar tu lógica de autenticación aquí
+    if (username && password) {
+      try {
+        // Enviar datos al servidor para autenticación
+        const response = await fetch('http://localhost:8000/backend/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
 
+        if (response.ok) {
+          // Si la autenticación es exitosa, realiza la solicitud a la base de datos
+          console.log(response)
+        } else {
+          console.error('Error de autenticación:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
     // Limpia los campos después de enviar el formulario
     setUsername('');
     setPassword('');
+  };
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/get_users/');
+      const data = await response.json();
+      // Puedes hacer algo con los datos, por ejemplo, establecer el estado local
+      // setUsers(data.users);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
