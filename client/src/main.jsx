@@ -6,10 +6,10 @@ import { Home } from './pages/Home.jsx'
 import { Ejercicios } from './pages/Ejercicios.jsx'
 import { Login } from './pages/Login.jsx'
 import { Rutinas } from './pages/Rutinas.jsx'
-import { Sesiones } from './pages/Sesiones.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Rutinas/>
+    <App/>
   </React.StrictMode>,
 )
