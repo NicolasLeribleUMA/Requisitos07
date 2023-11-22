@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/ventanaAdd.css'
+// import '../css/ventanaAdd.css'
 
 const listaDeEjercicios = [
   { nombre: 'Ejercicio 1', tipo: 'Cardio', privado: false },
