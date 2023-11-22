@@ -25,7 +25,7 @@ export function Login() {
         localStorage.setItem('authToken', authToken);
 
         // Realizar acciones adicionales, como redireccionar a la página principal
-        fetchUserData();
+        //fetchUserData();
       } else {
         console.error('Error de autenticación:', response.statusText);
       }
