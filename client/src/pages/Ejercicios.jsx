@@ -64,13 +64,22 @@ export function Ejercicios() {
             <h3>Nuevo Ejercicio</h3>
             <button onClick={cerrarVentana}>Cancelar</button>
             </div>
-            <p>Nombre: <input type="text" /></p>
+            <p>Nombre: <input type="text" style = {{marginLeft:'10px'}}/></p>
             
-            <p>Tipo: <input type="text" /></p>
+            <p>Tipo: <input type="text" style = {{marginLeft:'10px'}}/></p>
+           {/**  Esto es para ponerlo en modo seleccion, pero son valores fijados
+            <p style={{marginRight:'100px'}}>Link:  
             
-            <p>Link: <input type="text" /></p>
-            
-            <p>Descripcion: <input type="text" id="descripcion"/></p>
+              <select id="Link" name="Link">
+              <option value="Cardio">Cardio</option>
+              <option value="Fuerza">Fuerza</option>
+              <option value="Flexibilidad">Flexibilidad</option>
+              </select>
+            </p>
+            **/}
+
+            <p>Link: <input type="text" style = {{marginLeft:'10px'}}/></p>
+            <p>Descripcion: <input type="text" id="descripcion" style = {{marginLeft:'10px'}}/></p>
             
             <div style={{ display: 'flex', justifyContent: 'space-between'}}>
            
