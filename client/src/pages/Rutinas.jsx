@@ -197,7 +197,7 @@ export function Rutinas() {
                     
                     <div style={{ display: 'flex', justifyContent: 'space-between'}}>
                     <h3>Modificar Rutina</h3>
-                    <button onClick={cerrarVentana}>Cancelar</button>
+                    <button onClick={modifCerrarInfo}>Cancelar</button>
                     </div>
                     {/* <p>Sesiones: <input type="text" style = {{marginLeft:'10px'}}/></p> */}
                     <p style={{marginRight:'100px'}}>Sesiones:  
@@ -277,9 +277,10 @@ export function Rutinas() {
             {/* <p>Sesiones: <input type="text" style = {{marginLeft:'10px'}}/></p> */}
         
             <ul>
-        <li><input type="checkbox" id="checkbox1" name="checkbox1" /><label htmlFor="checkbox1">Checkbox 1</label></li>
-        <li><input type="checkbox" id="checkbox2" name="checkbox2" /><label htmlFor="checkbox2">Checkbox 2</label></li>
-        <li> <input type="checkbox" id="checkbox3" name="checkbox3" /><label htmlFor="checkbox3">Checkbox 3</label></li>
+        <li><input type="checkbox" id="checkbox1" name="checkbox1" /><label htmlFor="checkbox1">Pepito</label></li>
+        <li><input type="checkbox" id="checkbox2" name="checkbox2" /><label htmlFor="checkbox2">Maria</label></li>
+        <li> <input type="checkbox" id="checkbox3" name="checkbox3" /><label htmlFor="checkbox3">Estefania</label></li>
+        <li> <input type="checkbox" id="checkbox4" name="checkbox4" /><label htmlFor="checkbox4">Roberto</label></li>
             </ul>
         {   /* AQUI DEBERIA YA ESTAR MARCADAS LAS CHECKBOX DE LOS CLIENTES QUE YA PERTENEZCAN A ESA RUTINA */}
 

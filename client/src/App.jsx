@@ -3,6 +3,7 @@ import { Login } from "./pages/Login"
 import { Home } from "./pages/Home"
 import { Ejercicios } from "./pages/Ejercicios"
 import { Rutinas } from './pages/Rutinas.jsx'
+import { Sesiones } from './pages/Sesiones.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/ejercicios" element={<Ejercicios />} />
         <Route path="/rutinas" element={<Rutinas />} />
+        <Route path="/sesiones" element={<Sesiones />} />
       </Routes>
     </BrowserRouter>
   )
