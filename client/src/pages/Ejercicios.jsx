@@ -135,7 +135,8 @@ export function Ejercicios() {
             **/}
 
             <p>Link: <input type="text" style = {{marginLeft:'10px'}}/></p>
-            <p>Descripcion: <input type="text" id="descripcion" style = {{marginLeft:'10px'}}/></p>
+            {/* <p>Descripcion: <input type="text"  id="descripcion" style = {{marginLeft:'10px'}}/></p> */}
+            <p>Descripcion: <textarea class="textarea resize-ta"></textarea></p>
             
             <div style={{ display: 'flex', justifyContent: 'space-between'}}>
            
@@ -198,7 +199,7 @@ export function Ejercicios() {
             **/}
 
             <p>Link: <input type="text" style = {{marginLeft:'10px'}}/></p>
-            <p>Descripcion: <input type="text" id="descripcion" style = {{marginLeft:'10px'}}/></p>
+            <p>Descripcion: <textarea class="textarea resize-ta"></textarea></p>
             
             <div style={{ display: 'flex', justifyContent: 'space-between'}}>
            
