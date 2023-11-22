@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-// import '../css/ventanaAdd.css'
+import '../css/Ejercicios.css'
 
 const listaDeEjercicios = [
   { nombre: 'Ejercicio 1', tipo: 'Cardio', privado: false },
@@ -81,35 +81,32 @@ export function Ejercicios() {
 {/* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/}
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
-        <h2>EJERCICIOS</h2>
-        <Link to="/home">
-            <button>Atrás</button>
-        </Link>
-        <button onClick={abrirVentana}>Añadir ejercicio</button>
-        {/*HAY QUE HACER QUE VUELVA A HOME*/}
-      </div>
-      <div style ={{textAlign: 'left', marginLeft: '40px'}}>
-        <strong>Nombre</strong> | <strong>Tipo</strong> | <strong>Visibilidad</strong>
-      </div>
-      <ul>
-        {listaDeEjercicios.map((ejercicio, index) => (
-          <li key={index}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                {ejercicio.nombre} | {ejercicio.tipo} | {ejercicio.privado ? 'Privado' : 'Público'}
-              </div>
-              <div style={{ display: 'inline-block' }}>
-                <button onClick={abrirInfo}>Ver</button>
-                <button onClick={modifAbrirInfo}>Modificar</button>
-                <button onClick={abrePreguntaBorrado}>Borrar</button>
-              </div>
-            </div>
-            <hr /> {/* Línea para separar visualmente los ejercicios */}
-          </li>
-        ))}
-      </ul>
+    <div class="ejercicios-container">
+  <div class="ejercicios-header">
+    <h2>EJERCICIOS</h2>
+    <Link to="/home" class="ejercicios-link-button">
+      Atrás
+    </Link>
+    <button class="ejercicios-button" onClick={abrirVentana}>Añadir ejercicio</button>
+  </div>
+  <div class="ejercicios-info-header">
+    <strong>Nombre</strong> | <strong>Tipo</strong> | <strong>Visibilidad</strong>
+  </div>
+  <ul class="ejercicios-lista">
+    {listaDeEjercicios.map((ejercicio, index) => (
+      <li key={index} class="ejercicio-item">
+        <div class="ejercicio-info">
+          {ejercicio.nombre} | {ejercicio.tipo} | {ejercicio.privado ? 'Privado' : 'Público'}
+        </div>
+        <div class="ejercicios-botones">
+          <button onClick={abrirInfo}>Ver</button>
+          <button onClick={modifAbrirInfo}>Modificar</button>
+          <button onClick={abrePreguntaBorrado}>Borrar</button>
+        </div>
+        <hr class="ejercicios-linea" />
+      </li>
+    ))}
+  </ul>
 
       {/* Ventana/Modal */}
       {mostrarVentana && (

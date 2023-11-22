@@ -9,7 +9,7 @@
   
   .home-title {
     font-size: 24px;
-    color: #333;
+    color: #000000;
   }
   
   .home-nav {
@@ -21,7 +21,7 @@
   .home-button {
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #519ef0fe;
+    background-color: #af9d4c;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -30,6 +30,6 @@
   }
   
   .home-button:hover {
-    background-color: #0056b3;
+    background-color: #af9d4cab;
   }
   

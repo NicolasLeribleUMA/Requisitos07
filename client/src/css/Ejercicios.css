@@ -1,100 +1,77 @@
-/* Ejercicios.css */
+/* EjerciciosComponent.css */
+
+body {
+  margin: 0;
+  padding: 0;
+}
 
 .ejercicios-container {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-  }
-  
-  .ejercicios-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .ejercicios-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .ejercicios-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .ejercicios-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-  }
-  
-  .ejercicios-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .ejercicios-buttons {
-    display: inline-block;
-  }
-  
-  .ejercicios-buttons button {
-    margin-right: 5px;
-    padding: 5px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .ejercicios-buttons button:hover {
-    background-color: #0056b3;
-  }
-  
-  .ejercicios-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-  
-  .ejercicios-modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-  }
-  
-  .ejercicios-modal-content h3 {
-    margin-bottom: 10px;
-  }
-  
-  .ejercicios-modal-content button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .ejercicios-modal-content button:hover {
-    background-color: #0056b3;
-  }
-  
+  text-align: center;
+  font-family: 'Arial, sans-serif';
+  background-color: #f4f4f4;
+  margin: 20px;
+}
+
+.ejercicios-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centro vertical */
+  align-items: center; /* Centro horizontal */
+  margin-bottom: 10px;
+  background-color: #333;
+  color: white;
+  padding: 10px
+}
+
+h2 {
+  color: #fff;
+}
+
+.ejercicios-link-button {
+  text-decoration: none;
+  color: white;
+  margin-left: auto;
+}
+
+button {
+  background-color: #af9d4c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.ejercicios-info-header {
+  text-align: left;
+  margin-left: 40px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ejercicios-lista {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ejercicio-item {
+  margin-bottom: 10px;
+}
+
+.ejercicio-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ejercicios-botones {
+  display: inline-block;
+}
+
+.ejercicios-linea {
+  border: 1px solid #ddd;
+}

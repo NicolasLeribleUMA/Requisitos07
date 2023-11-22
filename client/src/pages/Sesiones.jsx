@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-// import '../css/ventanaAdd.css'
+import '../css/Sesiones.css'
 
 const listaDeEjercicios = [
   { nombre: 'Ejercicio 1', repeticiones: '2 rep.', series: '5 series' },
@@ -81,33 +81,32 @@ export function Sesiones() {
 {/* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/}
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
-        <h2>SESIONES</h2>
-        <Link to="/home">
-            <button>Atrás</button>
-        </Link>
-        <button onClick={abrirVentana}>Añadir sesión</button>
-        {/*HAY QUE HACER QUE VUELVA A HOME*/}
-      </div>
-      <div style ={{textAlign: 'left', marginLeft: '40px'}}>
-        <strong>Ejercicios</strong> | <strong>Repeticiones</strong> | <strong>Series</strong>
-      </div>
-      <ul>
-        {listaDeEjercicios.map((ejercicio, index) => (
-          <li key={index}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                {ejercicio.nombre} | {ejercicio.repeticiones} | {ejercicio.series}
-              </div>
-              <div style={{ display: 'inline-block' }}>
-                <button onClick={abrirInfo}>Ver</button>
-                <button onClick={modifAbrirInfo}>Modificar</button>
-                <button onClick={abrePreguntaBorrado}>Borrar</button>
-              </div>
-            </div>
-            <hr /> {/* Línea para separar visualmente los ejercicios */}
-          </li>
+    <div class="sesiones-container">
+  <div class="sesiones-header">
+    <h2>SESIONES</h2>
+    <Link to="/home" class="sesiones-link-button">
+      Atrás
+    </Link>
+    <button class="sesiones-button" onClick={abrirVentana}>Añadir sesión</button>
+  </div>
+  <div class="sesiones-info-header">
+    <strong>Ejercicios</strong> | <strong>Repeticiones</strong> | <strong>Series</strong>
+  </div>
+  <ul class="sesiones-lista">
+    {listaDeEjercicios.map((ejercicio, index) => (
+      <li key={index} class="sesiones-item">
+        <div class="sesiones-info">
+          <div>
+            {ejercicio.nombre} | {ejercicio.repeticiones} | {ejercicio.series}
+          </div>
+          <div class="sesiones-botones">
+            <button onClick={abrirInfo}>Ver</button>
+            <button onClick={modifAbrirInfo}>Modificar</button>
+            <button onClick={abrePreguntaBorrado}>Borrar</button>
+          </div>
+        </div>
+        <hr class="sesiones-linea" />
+      </li>
         ))}
       </ul>
 

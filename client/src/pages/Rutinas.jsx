@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
+import '../css/Rutinas.css'
 const listaDeEjercicios = [
   { nombre: 'Rutina 1', cliente: 'Pepito'},
   { nombre: 'Rutina 2', cliente: 'Maria'},
@@ -99,33 +100,30 @@ export function Rutinas() {
 {/* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/}
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
-        <h2>RUTINAS</h2>
-        <Link to="/home">
-          <button>Atrás</button>
-        </Link>
-        <button onClick={abrirVentana}>Añadir rutina</button>
-        {/*HAY QUE HACER QUE VUELVA A HOME*/}
-      </div>
+    <div class="rutinas-container">
+  <div class="rutinas-header">
+    <h2>RUTINAS</h2>
+    <Link to="/home" class="rutinas-link-button">
+      Atrás
+    </Link>
+    <button class="rutinas-button" onClick={abrirVentana}>Añadir rutina</button>
+  </div>
 
-   
-    {/* Aqui TENEMOS QUE HACER UN GRID PARA PODER AÑADIR LOS EJERCICIOS POR SEPARADO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px', margin: '20px'}}>
-        {/* Creación de la grid con ejercicios */}
-        {listaDeEjercicios.map((ejercicio, index) => (
-          <div key={index} style={{ border: '1px solid #ccc', padding: '10px', textAlign: 'center' }}>
-            <div>
-              <strong>{ejercicio.nombre}</strong>
-            </div>
-            <div>{ejercicio.cliente}</div>
-            <div style={{ marginTop: '10px' }}>
-            <button onClick={abrirInfo}>Ver</button>
-                <button onClick={modifAbrirInfo}>Modificar</button>
-                <button onClick={abrePreguntaBorrado}>Borrar</button>
-              <button onClick={abrirVentanaClientes}>Asignar cliente</button>
-            </div>
-          </div>
+  {/* Grid para mostrar los ejercicios */}
+  <div class="rutinas-grid">
+    {listaDeEjercicios.map((ejercicio, index) => (
+      <div key={index} class="rutinas-ejercicio">
+        <div>
+          <strong>{ejercicio.nombre}</strong>
+        </div>
+        <div>{ejercicio.cliente}</div>
+        <div class="rutinas-ejercicio-info">
+          <button onClick={abrirInfo}>Ver</button>
+          <button onClick={modifAbrirInfo}>Modificar</button>
+          <button onClick={abrePreguntaBorrado}>Borrar</button>
+          <button onClick={abrirVentanaClientes}>Asignar cliente</button>
+        </div>
+      </div>
         ))}
       </div>
     

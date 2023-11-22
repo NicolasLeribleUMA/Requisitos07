@@ -1,0 +1,78 @@
+/* SesionesComponent.css */
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sesiones-container {
+    text-align: center;
+    font-family: 'Arial, sans-serif';
+    background-color: #f4f4f4;
+    margin: 20px;
+  }
+  
+  .sesiones-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centro vertical */
+    align-items: center; /* Centro horizontal */
+    margin-bottom: 10px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+  }
+  
+  h2 {
+    color: #fff;
+  }
+  
+  .sesiones-link-button {
+    text-decoration: none;
+    color: white;
+    margin-left: auto;
+  }
+  
+  .sesiones-button {
+    background-color: #af9d4c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  
+  .sesiones-info-header {
+    text-align: left;
+    margin-left: 40px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .sesiones-lista {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sesiones-item {
+    margin-bottom: 10px;
+  }
+  
+  .sesiones-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sesiones-botones {
+    display: inline-block;
+  }
+  
+  .sesiones-linea {
+    border: 1px solid #ddd;
+  }
+  
