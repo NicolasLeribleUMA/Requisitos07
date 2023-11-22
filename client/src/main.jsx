@@ -7,6 +7,6 @@ import { Ejercicios } from './pages/Ejercicios.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Ejercicios />
+    <Home/>
   </React.StrictMode>,
 )
