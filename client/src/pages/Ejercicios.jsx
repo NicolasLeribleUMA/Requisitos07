@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
 // import '../css/ventanaAdd.css'
 
 const listaDeEjercicios = [
@@ -83,7 +84,9 @@ export function Ejercicios() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
         <h2>EJERCICIOS</h2>
-        <button onClick={abrirVentana}>Atrás</button>
+        <Link to="/home">
+            <button>Atrás</button>
+        </Link>
         <button onClick={abrirVentana}>Añadir ejercicio</button>
         {/*HAY QUE HACER QUE VUELVA A HOME*/}
       </div>

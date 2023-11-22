@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {Link} from 'react-router-dom'
 const listaDeEjercicios = [
   { nombre: 'Rutina 1', cliente: 'Pepito'},
   { nombre: 'Rutina 2', cliente: 'Maria'},
@@ -102,7 +102,9 @@ export function Rutinas() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
         <h2>RUTINAS</h2>
-        <button onClick={abrirVentana}>Atrás</button>
+        <Link to="/home">
+          <button>Atrás</button>
+        </Link>
         <button onClick={abrirVentana}>Añadir rutina</button>
         {/*HAY QUE HACER QUE VUELVA A HOME*/}
       </div>
