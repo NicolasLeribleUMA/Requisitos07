@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fitness_app',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders'
 ]
 
@@ -79,8 +80,11 @@ WSGI_APPLICATION = 'fitness_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'grupo07DB',
+        'USER': 'grupo07',
+        'PASSWORD': 'FjLWM6DNk6TJDzfV',
+        'HOST':'database-1.cugyzf4vivsu.eu-central-1.rds.amazonaws.com',
     }
 }
 
@@ -133,5 +137,13 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer',
+    ]
 }
