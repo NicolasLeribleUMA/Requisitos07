@@ -7,10 +7,16 @@ class Trainer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=30)
 
+    def __str__(self):
+        return str(self.user.username)
+
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.user.username)
 
 
 class Exercise(models.Model):
@@ -48,6 +54,9 @@ class Routine(models.Model):
     client = models.OneToOneField(Client, on_delete=models.SET_NULL, null=True)
     trainer = models.OneToOneField(Trainer, on_delete=models.CASCADE)
     trainingSessions = models.ManyToManyField(TrainingSession)
+
+    def __str__(self):
+        return f"Rutina de {self.client.user.username}"
 
 
 class Rating(models.Model):
