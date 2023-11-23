@@ -7,6 +7,7 @@ import { Ejercicios } from './pages/Ejercicios.jsx'
 import { Login } from './pages/Login.jsx'
 import { Rutinas } from './pages/Rutinas.jsx'
 import { Sesiones } from './pages/Sesiones.jsx'
+// import { Clientes } from './pages/Clientes.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

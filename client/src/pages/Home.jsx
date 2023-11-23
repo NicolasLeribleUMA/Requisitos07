@@ -21,6 +21,11 @@ export function Home() {
             <a href="/sesiones">Sesiones</a>
           </button>
         </div>
+        <div>
+          <button className="home-button">
+            <a href="/clientes">Tus Clientes</a>
+          </button>
+        </div>
       </nav>
     </div>
   );
