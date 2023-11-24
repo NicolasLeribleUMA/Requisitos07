@@ -16,7 +16,7 @@ class Client(models.Model):
     weight = models.IntegerField
     imc = models.IntegerField
     measureDate = models.DateField
-    objective = models.CharField(max_length=200)
+    objective = models.CharField(max_length=200, default='')
     trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
