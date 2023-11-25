@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import {Link} from 'react-router-dom'
+import { getEjercicios } from '../api/api';
 import '../css/Ejercicios.css'
 
 const listaDeEjercicios = [
@@ -17,6 +18,17 @@ export function Ejercicios() {
   const [mostrarVentanaConfirmacionModif, setMostrarVentanaConfirmacionModif] = useState(false);
   const [preguntaBorrado, setPreguntaBorrado] = useState(false);
   const [mostrarVentanaConfirmacionBorrado, setMostrarVentanaConfirmacionBorrado] = useState(false);
+  const [ejercicios, setEjercicios] = useState([]);
+
+  useEffect(() => {
+    // Llamada a la API al montar el componente
+    const fetchEjercicios = async () => {
+      const data = await getEjercicios();
+      setEjercicios(data);
+    };
+
+    fetchEjercicios();
+  }, []);
 
   const abrirVentana = () => {
     setMostrarVentana(true);
@@ -93,7 +105,7 @@ export function Ejercicios() {
     <strong>Nombre</strong> | <strong>Tipo</strong> | <strong>Visibilidad</strong>
   </div>
   <ul class="ejercicios-lista">
-    {listaDeEjercicios.map((ejercicio, index) => (
+    {ejercicios.map((ejercicio, index) => (
       <li key={index} class="ejercicio-item">
         <div class="ejercicio-info">
           {ejercicio.nombre} | {ejercicio.tipo} | {ejercicio.privado ? 'Privado' : 'Público'}
