@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/Login.css";
 
 export function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/backend/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/backend/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
@@ -24,39 +24,44 @@ export function Login() {
         const authToken = responseData.token;
 
         // Almacenar el token en el estado o en el almacenamiento local (puedes usar localStorage)
-        localStorage.setItem('authToken', authToken);
+        localStorage.setItem("authToken", authToken);
+        console.log("Datos de usuario:", responseData);
 
         // Realizar acciones adicionales, como redireccionar a la página principal
-        navigate('/home');
-        //fetchUserData();
+        navigate("/home");
+        // fetchUserData();
       } else {
-        console.error('Error de autenticación:', response.statusText);
+        console.error("Error de autenticación:", response.statusText);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   const fetchUserData = async () => {
     try {
       // Obtener el token almacenado
-      const authToken = localStorage.getItem('authToken');
+      const authToken = localStorage.getItem("authToken");
 
-      const response = await fetch('http://localhost:8000/api/get_users/', {
+      const response = await fetch("http://localhost:8000/backend/login", {
         headers: {
-          'Authorization': `Bearer ${authToken}`,
+          Authorization: `Token ${authToken}`,
         },
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Puedes hacer algo con los datos, por ejemplo, establecer el estado local
-        // setUsers(data.users);
+        // establecer el estado local
+        console.log("Datos de usuario:", data);
+        setUsers(data.users);
       } else {
-        console.error('Error al obtener datos de usuario:', response.statusText);
+        console.error(
+          "Error al obtener datos de usuario:",
+          response.statusText
+        );
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -75,7 +80,7 @@ export function Login() {
         </label>
         <label className="login-label">
           Contraseña:
-          <br/>
+          <br />
           <input
             className="login-input"
             type="password"

@@ -6,6 +6,7 @@ import Añadir from "../components/Ejercicios/Añadir";
 import Info from "../components/Ejercicios/Info";
 import Modificar from "../components/Ejercicios/Modificar";
 import Borrar from "../components/Ejercicios/Borrar";
+
 const listaDeEjercicios = [
   { nombre: "Ejercicio 1", tipo: "Cardio", privado: false },
   { nombre: "Ejercicio 2", tipo: "Fuerza", privado: true },
@@ -15,16 +16,8 @@ const listaDeEjercicios = [
 
 export function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
-
-  useEffect(() => {
-    // Llamada a la API al montar el componente
-    const fetchEjercicios = async () => {
-      const data = await getEjercicios();
-      setEjercicios(data);
-    };
-
-    fetchEjercicios();
-  }, []);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [mostrarVentana, setMostrarVentana] = useState(false);
   const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] =
@@ -94,49 +87,53 @@ export function Ejercicios() {
     setPreguntaBorrado(false);
   };
 
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/
-  }
-  {
-    /* VENTANA DE VER EJERCICIO */
-  }
-  {
-    /* MODIFICAR DE VER EJERCICIO */
-  }
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/
-  }
-  {
-    /* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */
-  }
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/
-  }
+  useEffect(() => {
+    // Llamada a la API al montar el componente
+    const fetchEjercicios = async () => {
+      try {
+        const data = await getEjercicios();
+        setEjercicios(data);
+      } catch (error) {
+        setError(error.message || "Error al obtener datos de la API");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return (
-    <div class="ejercicios-container">
-      <div class="ejercicios-header">
-        <h2>EJERCICIOS</h2>
-        <Link to="/home" class="ejercicios-link-button">
-          Atrás
-        </Link>
-        <button class="ejercicios-button" onClick={abrirVentana}>
-          Añadir ejercicio
-        </button>
-        <Añadir
-          mostrarVentana={mostrarVentana}
-          cerrarVentana={cerrarVentana}
-          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
-          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
-          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
-        />
-      </div>
-      <div class="ejercicios-info-header">
-        <strong>Nombre</strong> | <strong>Tipo</strong> |{" "}
-        <strong>Visibilidad</strong>
-      </div>
+    fetchEjercicios();
+  }, []);
+
+  const renderEjercicios = () => {
+    if (loading) {
+      return <p>Cargando ejercicios...</p>;
+    }
+
+    if (error) {
+      return <p>Error: {error}</p>;
+    }
+
+    {
+      /* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/
+    }
+    {
+      /* VENTANA DE VER EJERCICIO */
+    }
+    {
+      /* MODIFICAR DE VER EJERCICIO */
+    }
+    {
+      /* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/
+    }
+    {
+      /* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */
+    }
+    {
+      /* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/
+    }
+
+    return (
       <ul class="ejercicios-lista">
-        {listaDeEjercicios.map((ejercicio, index) => (
+        {ejercicios.map((ejercicio, index) => (
           <li key={index} class="ejercicio-item">
             <div class="ejercicio-info">
               {ejercicio.nombre} | {ejercicio.tipo} |{" "}
@@ -174,6 +171,31 @@ export function Ejercicios() {
           </li>
         ))}
       </ul>
+    );
+  };
+  return (
+    <div class="ejercicios-container">
+      <div class="ejercicios-header">
+        <h2>EJERCICIOS</h2>
+        <Link to="/home" class="ejercicios-link-button">
+          Atrás
+        </Link>
+        <button class="ejercicios-button" onClick={abrirVentana}>
+          Añadir ejercicio
+        </button>
+        <Añadir
+          mostrarVentana={mostrarVentana}
+          cerrarVentana={cerrarVentana}
+          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+        />
+      </div>
+      <div class="ejercicios-info-header">
+        <strong>Nombre</strong> | <strong>Tipo</strong> |{" "}
+        <strong>Visibilidad</strong>
+      </div>
+      {renderEjercicios()}
     </div>
   );
 }
