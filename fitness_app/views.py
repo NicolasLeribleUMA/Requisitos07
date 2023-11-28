@@ -2,9 +2,10 @@ from django.http import JsonResponse
 
 from fitness_app.aux_func import response
 from rest_framework import status, viewsets
+from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
+from django.forms.models import model_to_dict
 from fitness_app.models import *
 from fitness_app.serializer import *
 
@@ -35,6 +36,11 @@ class TrainerView(viewsets.ModelViewSet):
     serializer_class = TrainerSerializer
     queryset = Trainer.objects.all()
 
+
+@permission_classes([IsAuthenticated])
+def trainerGetID(request):
+    data = {'trainerID': model_to_dict(Trainer.objects.get(user=request.user))}
+    return Response(data, status=status.HTTP_200_OK)
 
 @permission_classes([IsAuthenticated])
 class ExerciseView(viewsets.ModelViewSet):

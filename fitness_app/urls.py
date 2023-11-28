@@ -17,5 +17,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('docs/', include_docs_urls(title='Fitness Well Being API')),
     path('login', obtain_auth_token, name='login'),
-    path('logout', views.logout, name='logout')
+    path('logout', views.logout, name='logout'),
+    path('trainerGetID', views.trainerGetID, name='trainerGetID')
 ]
