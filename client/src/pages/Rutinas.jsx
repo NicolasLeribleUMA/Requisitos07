@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import Info from '../components/Rutinas/Info';
+import Borrar from '../components/Rutinas/Borrar';
+import Modificar from '../components/Rutinas/Modificar';
+import Añadir from '../components/Rutinas/Añadir';
+import Asignar from '../components/Rutinas/Asignar';
 import {Link} from 'react-router-dom'
 import '../css/Rutinas.css'
 const listaDeEjercicios = [
@@ -107,6 +112,13 @@ export function Rutinas() {
       Atrás
     </Link>
     <button class="rutinas-button" onClick={abrirVentana}>Añadir rutina</button>
+    <Añadir
+          mostrarVentana={mostrarVentana}
+          cerrarVentana={cerrarVentana}
+          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+        />
   </div>
 
   {/* Grid para mostrar los ejercicios */}
@@ -119,9 +131,41 @@ export function Rutinas() {
         <div>{ejercicio.cliente}</div>
         <div class="rutinas-ejercicio-info">
           <button onClick={abrirInfo}>Ver</button>
+          <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
+
           <button onClick={modifAbrirInfo}>Modificar</button>
+          <Modificar
+                modificarInfo={modificarInfo}
+                modifCerrarInfo={modifCerrarInfo}
+                abrirVentanaConfirmacionModif={abrirVentanaConfirmacionModif}
+                mostrarVentanaConfirmacionModif={
+                  mostrarVentanaConfirmacionModif
+                }
+                cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
+              />
           <button onClick={abrePreguntaBorrado}>Borrar</button>
+          <Borrar
+                preguntaBorrado={preguntaBorrado}
+                cierraPreguntaBorrado={cierraPreguntaBorrado}
+                abrirVentanaConfirmacionBorrado={
+                  abrirVentanaConfirmacionBorrado
+                }
+                mostrarVentanaConfirmacionBorrado={
+                  mostrarVentanaConfirmacionBorrado
+                }
+                cerrarVentanaConfirmacionBorrado={
+                  cerrarVentanaConfirmacionBorrado
+                }
+              />
           <button onClick={abrirVentanaClientes}>Asignar cliente</button>
+          <Asignar
+              abrirVentanaClientes = {abrirVentanaClientes}
+              cerrarVentanaClientes = {cerrarVentanaClientes}
+              abrirVentanaConfirmacionClientes = {abrirVentanaConfirmacionClientes}
+            cerrarVentanaConfirmacionClientes = {cerrarVentanaConfirmacionClientes}
+            asignarClientes = {asignarClientes}
+            mostrarVentanaConfirmacionClientes = {mostrarVentanaConfirmacionClientes}
+          />
         </div>
       </div>
         ))}
@@ -129,180 +173,8 @@ export function Rutinas() {
     
 
 
-      {/* Ventana/Modal */}
-      {mostrarVentana && (
-        <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-            <h3>Nueva Rutina</h3>
-            <button onClick={cerrarVentana}>Cancelar</button>
-            </div>
-            {/* <p>Sesiones: <input type="text" style = {{marginLeft:'10px'}}/></p> */}
-            <p style={{marginRight:'100px'}}>Sesiones:  
-            
-              <select id="Sesiones" name="Sesiones">
-              <option value="Sesion1">Sesion1</option>
-              <option value="Sesion2">Sesion2</option>
-              <option value="Sesion3">Sesion3</option>
-              </select>
-            </p>
-            {/* Aqui deberiamos poner que pudiese elegir de las sesiones que ya tiene hechas (al añadir) */}
-            {/**Boton de añadir sesion que haga que salga un nuevo select para elegir otra, onCLick debe crear un nuevo select */}
-            <button>Añadir sesión</button>
-            <p>Objetivo: <input type="text" style = {{marginLeft:'10px'}}/></p>
-    
 
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-           
-            
-            <button onClick={abrirVentanaConfirmacion}>Confirmar</button>
-            {/* Este debería mostrar una ventana la rutina ha sido añadida y mostrarlo */}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {mostrarVentanaConfirmacion && (
-         <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-           
-           <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-           <h4>La rutina ha sido añadida</h4>
-           <button onClick={cerrarVentanaConfirmacion}>Ok</button>
-           {/* Cierra la ventana y te da mensaje positivo pero no añade nada aún!!!! */}
-           </div>
-           </div>
-          </div> 
-      )}
-    {mostrarInfo && (
-    <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-      
-      <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-      <h4>Info rutina</h4>
-      {/* AQUI DEBERIA MOSTRAR LA INFO DE LA RUTINA (SESIONES, OBJETIVO, CLIENTE ASIGNADO) */}
-      <button onClick={cerrarInfo}>Volver</button>
-      </div>
-      </div>
-     </div> 
- )}
-
-        {modificarInfo && (
-                <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-                    
-                    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                    <h3>Modificar Rutina</h3>
-                    <button onClick={modifCerrarInfo}>Cancelar</button>
-                    </div>
-                    {/* <p>Sesiones: <input type="text" style = {{marginLeft:'10px'}}/></p> */}
-                    <p style={{marginRight:'100px'}}>Sesiones:  
-                    
-                    <select id="Sesiones" name="Sesiones">
-                    <option value="Sesion1">Sesion1</option>
-                    <option value="Sesion2">Sesion2</option>
-                    <option value="Sesion3">Sesion3</option>
-                    </select>
-                    </p>
-                    {/* Aqui deberiamos poner que pudiese elegir de las sesiones que ya tiene hechas Y DEBERIAN SALIR LAS SESIONES QUE YA ESTAN EN LA RUTINA (para poder editar)?? */}
-                    {/* 2 casos : solo puede añadir cosas nuevas  || puede añadir y eliminar las sesiones */}
-                    {/**Boton de añadir sesion que haga que salga un nuevo select para elegir otra, onCLick debe crear un nuevo select */}
-                    <button>Añadir sesión</button>
-                    <p>Objetivo: <input type="text" style = {{marginLeft:'10px'}}/></p>
-            
-
-                    
-                    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                
-                    
-                    <button onClick={abrirVentanaConfirmacionModif}>Confirmar</button>
-                    {/* Este debería mostrar una ventana la rutina ha sido modificada y mostrarlo */}
-                    
-                    </div>
-                </div>
-                </div>
-            )}
-
-        {mostrarVentanaConfirmacionModif && (
-         <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-           
-           <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-           <h4>La rutina ha sido modificada</h4>
-           <button onClick={cerrarVentanaConfirmacionModif}>Ok</button>
-           {/* Cierra la ventana y te da mensaje positivo pero no modifica nada aún!!!! */}
-           </div>
-           </div>
-          </div> 
-      )}
-
-          {preguntaBorrado && (
-              <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-                
-                <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                <h4>¿Está seguro de borrar este ejercicio?</h4>
-                <button onClick={abrirVentanaConfirmacionBorrado}>Si</button>
-                <button onClick={cierraPreguntaBorrado}>No</button>
-                {/* Cierra la ventana y te da mensaje positivo pero no borra nada aún!!!! */}
-                </div>
-                </div>
-              </div> 
-          )}
-
-        {mostrarVentanaConfirmacionBorrado && (
-                <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                  <h4>El ejercicio ha sido eliminado correctamente</h4>
-                  <button onClick={cerrarVentanaConfirmacionBorrado}>Ok</button>
-                  </div>
-                  </div>
-                  </div> 
-              )}
-
-{asignarClientes && (
-        <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-            <h3>Tus clientes</h3>
-            <button onClick={cerrarVentanaClientes}>Cancelar</button>
-            </div>
-            {/* <p>Sesiones: <input type="text" style = {{marginLeft:'10px'}}/></p> */}
-        
-            <ul>
-        <li><input type="checkbox" id="checkbox1" name="checkbox1" /><label htmlFor="checkbox1">Pepito</label></li>
-        <li><input type="checkbox" id="checkbox2" name="checkbox2" /><label htmlFor="checkbox2">Maria</label></li>
-        <li> <input type="checkbox" id="checkbox3" name="checkbox3" /><label htmlFor="checkbox3">Estefania</label></li>
-        <li> <input type="checkbox" id="checkbox4" name="checkbox4" /><label htmlFor="checkbox4">Roberto</label></li>
-            </ul>
-        {   /* AQUI DEBERIA YA ESTAR MARCADAS LAS CHECKBOX DE LOS CLIENTES QUE YA PERTENEZCAN A ESA RUTINA */}
-
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-            <button onClick={abrirVentanaConfirmacionClientes}>Confirmar</button>
-            {/* Este debería mostrar una ventana los clientes han sido modificados y mostrarlo */}
-            </div>
-            
-          </div>
-        </div>
-      )}
-
-            {mostrarVentanaConfirmacionClientes && (
-                <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: '1' }}>
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', width: '300px' }}>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                  <h4>Tus clientes han sido editados correctamente</h4>
-                  <button onClick={cerrarVentanaConfirmacionClientes}>Ok</button>
-                  </div>
-                  </div>
-                  </div> 
-              )}
+          
 
 </div>
 
