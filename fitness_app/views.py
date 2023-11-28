@@ -37,6 +37,7 @@ class TrainerView(viewsets.ModelViewSet):
     queryset = Trainer.objects.all()
 
 
+@api_view(('GET',))
 @permission_classes([IsAuthenticated])
 def trainerGetID(request):
     data = {'trainerID': model_to_dict(Trainer.objects.get(user=request.user))}
