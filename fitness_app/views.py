@@ -40,7 +40,8 @@ class TrainerView(viewsets.ModelViewSet):
 @api_view(('GET',))
 @permission_classes([IsAuthenticated])
 def trainerGetID(request):
-    data = {'trainerID': model_to_dict(Trainer.objects.get(user=request.user))}
+    trainer = Trainer.objects.get(user=request.user)
+    data = {'trainerID': trainer.pk}
     return Response(data, status=status.HTTP_200_OK)
 
 @permission_classes([IsAuthenticated])
