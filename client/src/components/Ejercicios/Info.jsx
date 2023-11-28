@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getDetalleEjercicio } from "../../api/api";
+const Info = ({ mostrarInfo, cerrarInfo, ejercicioId }) => {
+  const [ejercicio, setEjercicio] = useState(null);
 
-const Info = ({ mostrarInfo, cerrarInfo }) => {
+  useEffect(() => {
+    const obtenerDetalleEjercicio = async () => {
+      try {
+        if (ejercicioId && ejercicioId.id) {
+          // Asegúrate de que ejercicioId sea un objeto con un campo 'id'
+          const idEjercicio = ejercicioId.id;
+          console.log("ID del ejercicio:", idEjercicio);
+
+          const ejercicio = await getDetalleEjercicio(idEjercicio);
+          console.log("Datos del ejercicio:", ejercicio);
+          setEjercicio(ejercicio);
+        }
+      } catch (error) {
+        console.error("Error al obtener detalle del ejercicio:", error);
+      }
+    };
+
+    if (mostrarInfo && ejercicioId) {
+      obtenerDetalleEjercicio();
+    }
+  }, [mostrarInfo, ejercicioId]);
   return (
     <>
       {mostrarInfo && (
@@ -32,6 +55,17 @@ const Info = ({ mostrarInfo, cerrarInfo }) => {
               <button onClick={cerrarInfo}>Volver</button>
               {/* Cierra la ventana y te da mensaje positivo pero no añade nada aún!!!! */}
             </div>
+            {ejercicio ? (
+              <>
+                <p>Nombre: {ejercicio.name}</p>
+                <p>Tipo: {ejercicio.type}</p>
+                <p>Link: {ejercicio.videoURL}</p>
+                <p>Descripción: {ejercicio.desc}</p>
+                <p>Privado: {ejercicio.isPrivate ? "Sí" : "No"}</p>
+              </>
+            ) : (
+              <p>Cargando información del ejercicio...</p>
+            )}
           </div>
         </div>
       )}

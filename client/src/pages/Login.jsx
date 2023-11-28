@@ -25,7 +25,9 @@ export function Login() {
 
         // Almacenar el token en el estado o en el almacenamiento local (puedes usar localStorage)
         localStorage.setItem("authToken", authToken);
+        localStorage.setItem("username", responseData.username);
         console.log("Datos de usuario:", responseData);
+        console.log("suario:", responseData.username);
 
         // Realizar acciones adicionales, como redireccionar a la página principal
         navigate("/home");

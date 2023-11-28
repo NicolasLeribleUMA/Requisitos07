@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { addEjercicio } from "../../api/api";
 const Añadir = ({
   mostrarVentana,
   cerrarVentana,
@@ -7,6 +7,45 @@ const Añadir = ({
   mostrarVentanaConfirmacion,
   cerrarVentanaConfirmacion,
 }) => {
+  const [name, setNombre] = useState("");
+  const [type, setTipo] = useState("");
+  const [desc, setDescripcion] = useState("");
+  const [videoURL, setLink] = useState("");
+  const [trainer, setTrainer] = useState("");
+  const [isPrivate, setPrivado] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const authToken = localStorage.getItem("authToken");
+      // Crear un objeto con los datos del nuevo ejercicio
+      const nuevoEjercicio = {
+        name,
+        type,
+        videoURL,
+        desc,
+        isPrivate,
+        trainer,
+      };
+
+      // Llamar a la función para añadir ejercicio
+      await addEjercicio(JSON.stringify(nuevoEjercicio));
+
+      // Limpiar los campos después de añadir el ejercicio
+      setNombre("");
+      setTipo("");
+      setLink("");
+      setTrainer("");
+      setDescripcion("");
+      setPrivado(false);
+
+      // Actualizar la lista de ejercicios en el componente padre
+      abrirVentanaConfirmacion();
+      actualizarEjercicios();
+    } catch (error) {
+      console.error("Error al añadir ejercicio:", error);
+    }
+  };
   return (
     <>
       {mostrarVentana && (
@@ -38,11 +77,23 @@ const Añadir = ({
               <button onClick={cerrarVentana}>Cancelar</button>
             </div>
             <p>
-              Nombre: <input type="text" style={{ marginLeft: "10px" }} />
+              Nombre:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={name}
+                onChange={(e) => setNombre(e.target.value)}
+              />
             </p>
-
+            /
             <p>
-              Tipo: <input type="text" style={{ marginLeft: "10px" }} />
+              Tipo:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={type}
+                onChange={(e) => setTipo(e.target.value)}
+              />
             </p>
             {/**  Esto es para ponerlo en modo seleccion, pero son valores fijados
         <p style={{marginRight:'100px'}}>Link:  
@@ -54,21 +105,35 @@ const Añadir = ({
           </select>
         </p>
         **/}
-
             <p>
-              Link: <input type="text" style={{ marginLeft: "10px" }} />
+              Link:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={videoURL}
+                onChange={(e) => setLink(e.target.value)}
+              />
             </p>
             {/* <p>Descripcion: <input type="text"  id="descripcion" style = {{marginLeft:'10px'}}/></p> */}
             <p>
-              Descripcion: <textarea class="textarea resize-ta"></textarea>
+              Descripcion:{" "}
+              <textarea
+                class="textarea resize-ta"
+                value={desc}
+                onChange={(e) => setDescripcion(e.target.value)}
+              ></textarea>
             </p>
-
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <label>
-                <input type="checkbox" value="Privado" /> Privado{" "}
+                <input
+                  type="checkbox"
+                  checked={isPrivate}
+                  onChange={() => setPrivado(!isPrivate)}
+                />{" "}
+                Privado{" "}
               </label>
 
-              <button onClick={abrirVentanaConfirmacion}>Confirmar</button>
+              <button onClick={handleSubmit}>Confirmar</button>
               {/* Este debería mostrar una ventana de ejercicio añadido y mostrarlo */}
             </div>
           </div>

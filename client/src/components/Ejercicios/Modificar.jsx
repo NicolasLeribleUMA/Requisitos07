@@ -1,12 +1,50 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { ModificarEjercicio } from "../../api/api";
 const Modificar = ({
   modificarInfo,
   modifCerrarInfo,
   abrirVentanaConfirmacionModif,
   mostrarVentanaConfirmacionModif,
   cerrarVentanaConfirmacionModif,
+  ejercicioActual,
 }) => {
+  const [name, setNombre] = useState("");
+  const [type, setTipo] = useState("");
+  const [videoURL, setLink] = useState("");
+  const [desc, setDescripcion] = useState("");
+  const [isPrivate, setPrivado] = useState(false);
+
+  // Cuando se abra la ventana de modificación, actualizar los estados con los datos actuales
+  useEffect(() => {
+    if (modificarInfo && ejercicioActual) {
+      setNombre(ejercicioActual.name);
+      setTipo(ejercicioActual.type);
+      setLink(ejercicioActual.videoURL);
+      setDescripcion(ejercicioActual.desc);
+      setPrivado(ejercicioActual.isPrivate);
+    }
+  }, [modificarInfo, ejercicioActual]);
+
+  const handleConfirmarModificacion = async () => {
+    // Construir objeto con los datos modificados
+    const datosModificados = {
+      name,
+      type,
+      videoURL,
+      desc,
+      isPrivate,
+    };
+
+    // Aquí deberías llamar a la función para enviar los datos modificados a la API
+    const response = await ModificarEjercicio(
+      ejercicioActual.id,
+      datosModificados
+    );
+    console.log(response); // Verifica la respuesta del servidor
+
+    // Después de enviar los datos a la API, puedes mostrar la ventana de confirmación
+    abrirVentanaConfirmacionModif();
+  };
   return (
     <>
       {modificarInfo && (
@@ -38,11 +76,23 @@ const Modificar = ({
               <button onClick={modifCerrarInfo}>Cancelar</button>
             </div>
             <p>
-              Nombre: <input type="text" style={{ marginLeft: "10px" }} />
+              Nombre:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={name}
+                onChange={(e) => setNombre(e.target.value)}
+              />
             </p>
 
             <p>
-              Tipo: <input type="text" style={{ marginLeft: "10px" }} />
+              Tipo:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={type}
+                onChange={(e) => setTipo(e.target.value)}
+              />
             </p>
             {/**  Esto es para ponerlo en modo seleccion, pero son valores fijados
             <p style={{marginRight:'100px'}}>Link:  
@@ -56,18 +106,35 @@ const Modificar = ({
             **/}
 
             <p>
-              Link: <input type="text" style={{ marginLeft: "10px" }} />
+              Link:{" "}
+              <input
+                type="text"
+                style={{ marginLeft: "10px" }}
+                value={videoURL}
+                onChange={(e) => setLink(e.target.value)}
+              />
             </p>
             <p>
-              Descripcion: <textarea class="textarea resize-ta"></textarea>
+              Descripcion:{" "}
+              <textarea
+                class="textarea resize-ta"
+                value={desc}
+                onChange={(e) => setDescripcion(e.target.value)}
+              ></textarea>
             </p>
 
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <label>
-                <input type="checkbox" value="Privado" /> Privado{" "}
+                <input
+                  type="checkbox"
+                  value="Privado"
+                  checked={isPrivate}
+                  onChange={() => setPrivado(!isPrivate)}
+                />{" "}
+                Privado{" "}
               </label>
 
-              <button onClick={abrirVentanaConfirmacionModif}>Confirmar</button>
+              <button onClick={handleConfirmarModificacion}>Confirmar</button>
               {/* Este debería mostrar una ventana de ejercicio añadido y mostrarlo */}
             </div>
           </div>

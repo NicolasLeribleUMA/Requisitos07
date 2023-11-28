@@ -141,7 +141,11 @@ export function Ejercicios() {
             </div>
             <div class="ejercicios-botones">
               <button onClick={abrirInfo}>Ver</button>
-              <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
+              <Info
+                mostrarInfo={mostrarInfo}
+                cerrarInfo={cerrarInfo}
+                ejercicioId={ejercicio}
+              />
               <button onClick={modifAbrirInfo}>Modificar</button>
               <Modificar
                 modificarInfo={modificarInfo}
@@ -151,6 +155,7 @@ export function Ejercicios() {
                   mostrarVentanaConfirmacionModif
                 }
                 cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
+                ejercicioActual={ejercicio}
               />
               <button onClick={abrePreguntaBorrado}>Borrar</button>
               <Borrar
