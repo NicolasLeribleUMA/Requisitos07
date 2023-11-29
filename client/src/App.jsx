@@ -4,7 +4,7 @@ import { Home } from "./pages/Home"
 import { Ejercicios } from "./pages/Ejercicios"
 import { Rutinas } from './pages/Rutinas.jsx'
 import { Sesiones } from './pages/Sesiones.jsx'
-// import { Clientes } from './pages/Clientes.jsx'
+import { Clientes } from './pages/Clientes.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +15,7 @@ function App() {
         <Route path="/ejercicios" element={<Ejercicios />} />
         <Route path="/rutinas" element={<Rutinas />} />
         <Route path="/sesiones" element={<Sesiones />} />
-        {/* <Route path="/clientes" element={<Clientes />} /> */}
+         <Route path="/clientes" element={<Clientes />} />
       </Routes>
     </BrowserRouter>
   )

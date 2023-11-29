@@ -23,7 +23,7 @@ export function Home() {
         </div>
         <div>
           <button className="home-button">
-            <a href="/clientes">Tus Clientes</a>
+            <a href="/clientes">Clientes</a>
           </button>
         </div>
       </nav>
