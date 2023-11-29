@@ -95,7 +95,7 @@ const Añadir = ({
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              background: "white",
+              background: "#11ffee00",
               padding: "20px",
               borderRadius: "8px",
               width: "300px",
