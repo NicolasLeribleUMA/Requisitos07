@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addEjercicio } from "../../api/api";
+import { addEjercicio, obtenerIDEntrenador } from "../../api/Ejercicios";
 const Añadir = ({
   mostrarVentana,
   cerrarVentana,
@@ -17,7 +17,7 @@ const Añadir = ({
     e.preventDefault();
 
     try {
-      const authToken = localStorage.getItem("authToken");
+      const trainerID = await obtenerIDEntrenador();
       // Crear un objeto con los datos del nuevo ejercicio
       const nuevoEjercicio = {
         name,
@@ -25,7 +25,7 @@ const Añadir = ({
         videoURL,
         desc,
         isPrivate,
-        trainer,
+        trainer: trainerID,
       };
 
       // Llamar a la función para añadir ejercicio
@@ -41,7 +41,7 @@ const Añadir = ({
 
       // Actualizar la lista de ejercicios en el componente padre
       abrirVentanaConfirmacion();
-      actualizarEjercicios();
+      //actualizarEjercicios();
     } catch (error) {
       console.error("Error al añadir ejercicio:", error);
     }
@@ -127,6 +127,7 @@ const Añadir = ({
               <label>
                 <input
                   type="checkbox"
+                  value="Privado"
                   checked={isPrivate}
                   onChange={() => setPrivado(!isPrivate)}
                 />{" "}

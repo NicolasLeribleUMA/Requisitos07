@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ModificarEjercicio } from "../../api/api";
+import { ModificarEjercicio } from "../../api/Ejercicios";
 const Modificar = ({
   modificarInfo,
   modifCerrarInfo,

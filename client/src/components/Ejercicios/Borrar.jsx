@@ -1,12 +1,24 @@
 import React from "react";
-
+import { EliminarEjercicio } from "../../api/Ejercicios";
 const Borrar = ({
   preguntaBorrado,
   cierraPreguntaBorrado,
   abrirVentanaConfirmacionBorrado,
   mostrarVentanaConfirmacionBorrado,
   cerrarVentanaConfirmacionBorrado,
+  ejercicioID,
 }) => {
+  const handleEliminarEjercicio = async () => {
+    try {
+      // Llama a la función para eliminar el ejercicio
+      await EliminarEjercicio(ejercicioID);
+      // Muestra la ventana de confirmación de borrado
+      abrirVentanaConfirmacionBorrado();
+    } catch (error) {
+      console.error("Error al eliminar el ejercicio:", error);
+      // Manejar el error de alguna manera (por ejemplo, mostrar un mensaje al usuario)
+    }
+  };
   return (
     <>
       {preguntaBorrado && (
@@ -35,7 +47,7 @@ const Borrar = ({
           >
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h4>¿Está seguro de borrar este ejercicio?</h4>
-              <button onClick={abrirVentanaConfirmacionBorrado}>Si</button>
+              <button onClick={handleEliminarEjercicio}>Si</button>
               <button onClick={cierraPreguntaBorrado}>No</button>
               {/* Cierra la ventana y te da mensaje positivo pero no borra nada aún!!!! */}
             </div>

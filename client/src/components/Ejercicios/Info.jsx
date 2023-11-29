@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDetalleEjercicio } from "../../api/api";
+import { getDetalleEjercicio } from "../../api/Ejercicios";
 const Info = ({ mostrarInfo, cerrarInfo, ejercicioId }) => {
   const [ejercicio, setEjercicio] = useState(null);
 

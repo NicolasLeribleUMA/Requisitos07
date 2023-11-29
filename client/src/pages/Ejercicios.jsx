@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getEjercicios } from "../api/api";
+import { getEjercicios } from "../api/Ejercicios";
 import "../css/Ejercicios.css";
 import Añadir from "../components/Ejercicios/Añadir";
 import Info from "../components/Ejercicios/Info";
 import Modificar from "../components/Ejercicios/Modificar";
 import Borrar from "../components/Ejercicios/Borrar";
 
-const listaDeEjercicios = [
-  { nombre: "Ejercicio 1", tipo: "Cardio", privado: false },
-  { nombre: "Ejercicio 2", tipo: "Fuerza", privado: true },
-  { nombre: "Ejercicio 3", tipo: "Flexibilidad", privado: false },
-  // ... otros ejercicios
-];
+// const listaDeEjercicios = [
+//   { nombre: "Ejercicio 1", tipo: "Cardio", privado: false },
+//   { nombre: "Ejercicio 2", tipo: "Fuerza", privado: true },
+//   { nombre: "Ejercicio 3", tipo: "Flexibilidad", privado: false },
+//   // ... otros ejercicios
+// ];
 
 export function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
@@ -112,32 +112,13 @@ export function Ejercicios() {
       return <p>Error: {error}</p>;
     }
 
-    {
-      /* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/
-    }
-    {
-      /* VENTANA DE VER EJERCICIO */
-    }
-    {
-      /* MODIFICAR DE VER EJERCICIO */
-    }
-    {
-      /* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/
-    }
-    {
-      /* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */
-    }
-    {
-      /* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/
-    }
-
     return (
       <ul class="ejercicios-lista">
         {ejercicios.map((ejercicio, index) => (
           <li key={index} class="ejercicio-item">
             <div class="ejercicio-info">
-              {ejercicio.nombre} | {ejercicio.tipo} |{" "}
-              {ejercicio.privado ? "Privado" : "Público"}
+              {ejercicio.name} | {ejercicio.type} |{" "}
+              {ejercicio.isPrivate ? "Privado" : "Público"}
             </div>
             <div class="ejercicios-botones">
               <button onClick={abrirInfo}>Ver</button>
@@ -170,6 +151,7 @@ export function Ejercicios() {
                 cerrarVentanaConfirmacionBorrado={
                   cerrarVentanaConfirmacionBorrado
                 }
+                ejercicioID={ejercicio.id}
               />
             </div>
             <hr class="ejercicios-linea" />
