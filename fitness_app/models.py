@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from datetime import datetime
 
 
 class Trainer(models.Model):
@@ -13,9 +14,9 @@ class Trainer(models.Model):
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    weight = models.IntegerField
-    imc = models.IntegerField
-    measureDate = models.DateField
+    weight = models.IntegerField(default=0)
+    imc = models.IntegerField(default=0)
+    measureDate = models.DateTimeField(default=datetime.now, blank=True)
     objective = models.CharField(max_length=200, default='')
     trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
 
@@ -45,8 +46,8 @@ class Exercise(models.Model):
 
 
 class TrainingSession(models.Model):
-    rep = models.IntegerField
-    sets = models.IntegerField
+    rep = models.IntegerField(default=0)
+    sets = models.IntegerField(default=0)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
 
     def __str__(self):
