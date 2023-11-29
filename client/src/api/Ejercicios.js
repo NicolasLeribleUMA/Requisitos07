@@ -16,6 +16,7 @@ export const getEjercicios = async () => {
 };
 
 export const getDetalleEjercicio = async (ejercicioId) => {
+  console.log("Llamada a getDetalleEjercicio con ID:", ejercicioId);
   const _token = localStorage.getItem('authToken');
   const config = {
     headers: {

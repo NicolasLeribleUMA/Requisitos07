@@ -18,7 +18,7 @@ export function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(null);
   const [mostrarVentana, setMostrarVentana] = useState(false);
   const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] =
     useState(false);
@@ -48,17 +48,21 @@ export function Ejercicios() {
     setMostrarVentana(false);
   };
 
-  const abrirInfo = () => {
+  const abrirInfo = (ejercicio) => {
+    setEjercicioSeleccionado(ejercicio);
     setMostrarInfo(true);
   };
   const cerrarInfo = () => {
+    setEjercicioSeleccionado(null);
     setMostrarInfo(false);
   };
 
-  const modifAbrirInfo = () => {
+  const modifAbrirInfo = (actual) => {
+    setEjercicioSeleccionado(actual);
     setModificarInfo(true);
   };
   const modifCerrarInfo = () => {
+    setEjercicioSeleccionado(null);
     setModificarInfo(false);
   };
 
@@ -121,13 +125,16 @@ export function Ejercicios() {
               {ejercicio.isPrivate ? "Privado" : "Público"}
             </div>
             <div class="ejercicios-botones">
-              <button onClick={abrirInfo}>Ver</button>
+              <button onClick={() => abrirInfo(ejercicio)}>Ver</button>
               <Info
                 mostrarInfo={mostrarInfo}
                 cerrarInfo={cerrarInfo}
-                ejercicioId={ejercicio}
+                ejercicioId={ejercicioSeleccionado}
               />
-              <button onClick={modifAbrirInfo}>Modificar</button>
+              <button onClick={() => modifAbrirInfo(ejercicio)}>
+                Modificar
+              </button>
+
               <Modificar
                 modificarInfo={modificarInfo}
                 modifCerrarInfo={modifCerrarInfo}
@@ -136,7 +143,7 @@ export function Ejercicios() {
                   mostrarVentanaConfirmacionModif
                 }
                 cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
-                ejercicioActual={ejercicio}
+                ejercicioActual={ejercicioSeleccionado}
               />
               <button onClick={abrePreguntaBorrado}>Borrar</button>
               <Borrar

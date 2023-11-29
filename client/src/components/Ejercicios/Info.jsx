@@ -8,7 +8,7 @@ const Info = ({ mostrarInfo, cerrarInfo, ejercicioId }) => {
       try {
         if (ejercicioId && ejercicioId.id) {
           // Asegúrate de que ejercicioId sea un objeto con un campo 'id'
-          const idEjercicio = ejercicioId.id;
+          const idEjercicio = ejercicioId ? ejercicioId.id : null;
           console.log("ID del ejercicio:", idEjercicio);
 
           const ejercicio = await getDetalleEjercicio(idEjercicio);
@@ -19,7 +19,6 @@ const Info = ({ mostrarInfo, cerrarInfo, ejercicioId }) => {
         console.error("Error al obtener detalle del ejercicio:", error);
       }
     };
-
     if (mostrarInfo && ejercicioId) {
       obtenerDetalleEjercicio();
     }
