@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
-import Info from '../components/Rutinas/Info';
-import Borrar from '../components/Rutinas/Borrar';
-import Modificar from '../components/Rutinas/Modificar';
-import Añadir from '../components/Rutinas/Añadir';
-import Asignar from '../components/Rutinas/Asignar';
-import {Link} from 'react-router-dom'
-import '../css/Rutinas.css'
-const listaDeEjercicios = [
-  { nombre: 'Rutina 1', cliente: 'Pepito'},
-  { nombre: 'Rutina 2', cliente: 'Maria'},
-  { nombre: 'Rutina 3', cliente: 'Estefania' },
-  // ... otros ejercicios
-];
+import React, { useState, useEffect } from "react";
+import Info from "../components/Rutinas/Info";
+import Borrar from "../components/Rutinas/Borrar";
+import Modificar from "../components/Rutinas/Modificar";
+import Añadir from "../components/Rutinas/Añadir";
+import { Link } from "react-router-dom";
+import { getRutinas } from "../api/Rutinas";
+import { getSesiones } from "../api/Sesiones";
+import "../css/Rutinas.css";
 
 export function Rutinas() {
+  const [rutinas, setRutinas] = useState([]);
+  const [sesiones, setSesiones] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [rutinaSeleccionado, setRutinaSeleccionado] = useState(null);
+
   const [mostrarVentana, setMostrarVentana] = useState(false);
-  const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] = useState(false);
+  const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] =
+    useState(false);
   const [mostrarInfo, setMostrarInfo] = useState(false);
   const [modificarInfo, setModificarInfo] = useState(false);
-  const [mostrarVentanaConfirmacionModif, setMostrarVentanaConfirmacionModif] = useState(false);
+  const [mostrarVentanaConfirmacionModif, setMostrarVentanaConfirmacionModif] =
+    useState(false);
   const [preguntaBorrado, setPreguntaBorrado] = useState(false);
-  const [mostrarVentanaConfirmacionBorrado, setMostrarVentanaConfirmacionBorrado] = useState(false);
-  const [asignarClientes, setAsignarClientes] = useState(false);
-  const [mostrarVentanaConfirmacionClientes, setMostrarVentanaConfirmacionClientes] = useState(false);
-
-
+  const [
+    mostrarVentanaConfirmacionBorrado,
+    setMostrarVentanaConfirmacionBorrado,
+  ] = useState(false);
   const abrirVentana = () => {
     setMostrarVentana(true);
   };
@@ -41,10 +44,12 @@ export function Rutinas() {
     setMostrarVentana(false);
   };
 
-  const abrirInfo = () => {
+  const abrirInfo = (irutina) => {
+    setRutinaSeleccionado(irutina);
     setMostrarInfo(true);
   };
   const cerrarInfo = () => {
+    setRutinaSeleccionado(null);
     setMostrarInfo(false);
   };
 
@@ -79,62 +84,68 @@ export function Rutinas() {
     setMostrarVentanaConfirmacionBorrado(false);
     setPreguntaBorrado(false);
   };
+  useEffect(() => {
+    // Obtener la lista de ejercicios al cargar el componente
+    const fetchRutinas = async () => {
+      try {
+        const rutinas = await getRutinas();
 
-  const abrirVentanaClientes = () => {
-    setAsignarClientes(true);
-  };
+        setRutinas(rutinas);
+      } catch (error) {
+        console.error("Error al obtener rutinas:", error);
+      }
+    };
 
-  const cerrarVentanaClientes = () => {
-    setAsignarClientes(false);
-  };
+    fetchRutinas();
+  }, []);
 
-  const abrirVentanaConfirmacionClientes = () => {
-    setMostrarVentanaConfirmacionClientes(true);
-  };
+  useEffect(() => {
+    // Llamada a la API al montar el componente
+    const fetchSesiones = async () => {
+      try {
+        const data = await getSesiones();
+        // const sesionesConNombre = data.map((sesion) => ({
+        //   ...sesion,
+        //   exercise: ejerciciosMap[sesion.exercise],
+        // }));
+        setSesiones(data);
+      } catch (error) {
+        setError(error.message || "Error al obtener datos de la API");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const cerrarVentanaConfirmacionClientes = () => {
-    setMostrarVentanaConfirmacionClientes(false);
-    setAsignarClientes(false);
-  };
+    fetchSesiones();
+  }, []);
 
-{/* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/}
-{/* VENTANA DE VER EJERCICIO */}
-{/* MODIFICAR DE VER EJERCICIO */}
-{/* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/}
-{/* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */}
-{/* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/}
+  const renderRutinas = () => {
+    if (loading) {
+      return <p>Cargando rutinas...</p>;
+    }
 
-  return (
-    <div class="rutinas-container">
-  <div class="rutinas-header">
-    <h2>RUTINAS</h2>
-    <Link to="/home" class="rutinas-link-button">
-      Atrás
-    </Link>
-    <button class="rutinas-button" onClick={abrirVentana}>Añadir rutina</button>
-    <Añadir
-          mostrarVentana={mostrarVentana}
-          cerrarVentana={cerrarVentana}
-          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
-          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
-          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
-        />
-  </div>
+    if (error) {
+      return <p>Error: {error}</p>;
+    }
 
-  {/* Grid para mostrar los ejercicios */}
-  <div class="rutinas-grid">
-    {listaDeEjercicios.map((ejercicio, index) => (
-      <div key={index} class="rutinas-ejercicio">
-        <div>
-          <strong>{ejercicio.nombre}</strong>
-        </div>
-        <div>{ejercicio.cliente}</div>
-        <div class="rutinas-ejercicio-info">
-          <button onClick={abrirInfo}>Ver</button>
-          <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
+    return (
+      <div class="rutinas-grid">
+        {rutinas.map((rutina, index) => (
+          <div key={index} class="rutinas-ejercicio">
+            <div>
+              <strong>{rutina.objective}</strong>
+            </div>
 
-          <button onClick={modifAbrirInfo}>Modificar</button>
-          <Modificar
+            <div class="rutinas-ejercicio-info">
+              <button onClick={() => abrirInfo(rutina)}>Ver</button>
+              <Info
+                mostrarInfo={mostrarInfo}
+                cerrarInfo={cerrarInfo}
+                rutinaId={rutinaSeleccionado}
+              />
+
+              <button onClick={modifAbrirInfo}>Modificar</button>
+              <Modificar
                 modificarInfo={modificarInfo}
                 modifCerrarInfo={modifCerrarInfo}
                 abrirVentanaConfirmacionModif={abrirVentanaConfirmacionModif}
@@ -143,8 +154,8 @@ export function Rutinas() {
                 }
                 cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
               />
-          <button onClick={abrePreguntaBorrado}>Borrar</button>
-          <Borrar
+              <button onClick={abrePreguntaBorrado}>Borrar</button>
+              <Borrar
                 preguntaBorrado={preguntaBorrado}
                 cierraPreguntaBorrado={cierraPreguntaBorrado}
                 abrirVentanaConfirmacionBorrado={
@@ -156,28 +167,33 @@ export function Rutinas() {
                 cerrarVentanaConfirmacionBorrado={
                   cerrarVentanaConfirmacionBorrado
                 }
+                rutinaID={rutina.id}
               />
-          <button onClick={abrirVentanaClientes}>Asignar cliente</button>
-          <Asignar
-              abrirVentanaClientes = {abrirVentanaClientes}
-              cerrarVentanaClientes = {cerrarVentanaClientes}
-              abrirVentanaConfirmacionClientes = {abrirVentanaConfirmacionClientes}
-            cerrarVentanaConfirmacionClientes = {cerrarVentanaConfirmacionClientes}
-            asignarClientes = {asignarClientes}
-            mostrarVentanaConfirmacionClientes = {mostrarVentanaConfirmacionClientes}
-          />
-        </div>
-      </div>
+            </div>
+          </div>
         ))}
       </div>
-    
-
-
-
-          
-
-</div>
-
-    
+    );
+  };
+  return (
+    <div class="rutinas-container">
+      <div class="rutinas-header">
+        <h2>RUTINAS</h2>
+        <Link to="/home" class="rutinas-link-button">
+          Atrás
+        </Link>
+        <button class="rutinas-button" onClick={abrirVentana}>
+          Añadir rutina
+        </button>
+        <Añadir
+          mostrarVentana={mostrarVentana}
+          cerrarVentana={cerrarVentana}
+          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+        />
+      </div>
+      {renderRutinas()}
+    </div>
   );
 }
