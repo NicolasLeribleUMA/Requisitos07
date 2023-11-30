@@ -28,7 +28,7 @@ class TrainingSessionSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
         super(TrainingSessionSerializer, self).__init__(*args, **kwargs)
-        self.fields['exercise'] = model_to_dict(Exercise.objects.find(id=self.fields['exercise']))
+        self.fields['exercise'] = model_to_dict(Exercise.objects.get(id=self.fields['exercise']))
 
 
 class RoutineSerializer(serializers.ModelSerializer):
