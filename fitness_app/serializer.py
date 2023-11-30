@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from django.forms.models import model_to_dict
+
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,6 +25,10 @@ class TrainingSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainingSession
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(TrainingSessionSerializer, self).__init__(*args, **kwargs)
+        self.fields['exercise'] = model_to_dict(Exercise.objects.find(id=self.fields['exercise']))
 
 
 class RoutineSerializer(serializers.ModelSerializer):
