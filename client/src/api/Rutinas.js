@@ -1,0 +1,87 @@
+import axios from 'axios';
+
+const API_URL = 'http://localhost:8000/backend/';
+
+export const getRutinas = async () => {
+  const _token  = localStorage.getItem('authToken');
+  console.log('Token:', _token);
+  const config = {
+    headers: {
+      Authorization: `Token ${_token}`,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}routines`, config);
+  return response.data;
+};
+
+export const getDetalleRutina= async (rutinaId) => {
+  const _token = localStorage.getItem('authToken');
+  const config = {
+    headers: {
+      Authorization: `Token ${_token}`,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}routines/${rutinaId}/`, config);
+  return response.data;
+};
+
+export const ModificarRutina= async (id, datosModificados) => {
+  const _token = localStorage.getItem('authToken');
+  const config = {
+    headers: {
+      Authorization: `Token ${_token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  console.log(datosModificados);
+  const response = await axios.patch(`${API_URL}routines/${id}/`, JSON.stringify(datosModificados), config); 
+  return response.data;
+};
+
+export const addRutina= async (nuevaRutina) => {
+  try {
+    const _token = localStorage.getItem('authToken');
+    const config = {
+      headers: {
+        Authorization: `Token ${_token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await axios.post(`${API_URL}routines/`, nuevaRutina, config);
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.error('Error al añadir sesion:', error);
+    throw error;
+  }
+};
+
+export const EliminarRutina = async (sesion) => {
+  const _token = localStorage.getItem('authToken');
+  const config = {
+    headers: {
+      Authorization: `Token ${_token}`,
+    },
+  };
+  const response = await axios.delete(`${API_URL}routines/${sesion}/`, config); 
+  return response.data;
+};
+export const obtenerIDEntrenador = async () => {
+  try {
+    const _token = localStorage.getItem('authToken');
+    const config = {
+      headers: {
+        Authorization: `Token ${_token}`,
+      },
+    };
+
+    const response = await axios.get(`${API_URL}trainerGetID`, config);
+    console.log('Usuario autenticado:', response.data.trainerID);
+    return response.data.trainerID;
+  } catch (error) {
+    console.error('Error al obtener el ID del entrenador:', error);
+    throw error;
+  }
+};

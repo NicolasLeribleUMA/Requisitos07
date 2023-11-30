@@ -91,11 +91,11 @@ export function Sesiones() {
     const fetchSesiones = async () => {
       try {
         const data = await getSesiones();
-        const sesionesConNombre = data.map((sesion) => ({
-          ...sesion,
-          exercise: ejerciciosMap[sesion.exercise],
-        }));
-        setSesiones(sesionesConNombre);
+        // const sesionesConNombre = data.map((sesion) => ({
+        //   ...sesion,
+        //   exercise: ejerciciosMap[sesion.exercise],
+        // }));
+        setSesiones(data);
       } catch (error) {
         setError(error.message || "Error al obtener datos de la API");
       } finally {
@@ -121,7 +121,7 @@ export function Sesiones() {
           <li key={index} class="sesiones-item">
             <div class="sesiones-info">
               <div>
-                {sesion.exercise} | {sesion.rep} | {sesion.sets}
+                {sesion.exercise.name} | {sesion.rep} | {sesion.sets}
               </div>
               <div class="sesiones-botones">
                 <button onClick={() => abrirInfo(sesion)}>Ver</button>
