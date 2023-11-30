@@ -22,7 +22,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
 
 class TrainingSessionSerializer(serializers.ModelSerializer):
-    exercise = ExerciseSerializer(many=False)
+    exercise = ExerciseSerializer(many=False, allow_null=False)
 
     class Meta:
         model = TrainingSession
@@ -30,6 +30,8 @@ class TrainingSessionSerializer(serializers.ModelSerializer):
 
 
 class RoutineSerializer(serializers.ModelSerializer):
+    trainingSessions = TrainingSessionSerializer(many=True, allow_null=True)
+
     class Meta:
         model = Routine
         fields = '__all__'
