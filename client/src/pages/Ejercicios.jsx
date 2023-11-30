@@ -7,13 +7,6 @@ import Info from "../components/Ejercicios/Info";
 import Modificar from "../components/Ejercicios/Modificar";
 import Borrar from "../components/Ejercicios/Borrar";
 
-// const listaDeEjercicios = [
-//   { nombre: "Ejercicio 1", tipo: "Cardio", privado: false },
-//   { nombre: "Ejercicio 2", tipo: "Fuerza", privado: true },
-//   { nombre: "Ejercicio 3", tipo: "Flexibilidad", privado: false },
-//   // ... otros ejercicios
-// ];
-
 export function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -5,15 +5,7 @@ import { getSesiones } from "../api/Sesiones";
 import { getEjercicios } from "../api/Ejercicios";
 import Añadir from "../components/Sesiones/Añadir";
 import Info from "../components/Sesiones/Info";
-import Modificar from "../components/Sesiones/Modificar";
 import Borrar from "../components/Sesiones/Borrar";
-
-const listaDeEjercicios = [
-  { nombre: "Ejercicio 1", repeticiones: "2 rep.", series: "5 series" },
-  { nombre: "Ejercicio 2", repeticiones: "3 rep.", series: "4 series" },
-  { nombre: "Ejercicio 3", repeticiones: "4 rep.", series: "7 series" },
-  // ... otros ejercicios
-];
 
 export function Sesiones() {
   const [sesiones, setSesiones] = useState([]);
@@ -21,13 +13,12 @@ export function Sesiones() {
   const [error, setError] = useState(null);
   const [ejerciciosMap, setEjerciciosMap] = useState({});
 
+  const [sesionSeleccionado, setSesionSeleccionado] = useState(null);
+
   const [mostrarVentana, setMostrarVentana] = useState(false);
   const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] =
     useState(false);
   const [mostrarInfo, setMostrarInfo] = useState(false);
-  const [modificarInfo, setModificarInfo] = useState(false);
-  const [mostrarVentanaConfirmacionModif, setMostrarVentanaConfirmacionModif] =
-    useState(false);
   const [preguntaBorrado, setPreguntaBorrado] = useState(false);
   const [
     mostrarVentanaConfirmacionBorrado,
@@ -50,27 +41,13 @@ export function Sesiones() {
     setMostrarVentana(false);
   };
 
-  const abrirInfo = () => {
+  const abrirInfo = (sesion) => {
+    setSesionSeleccionado(sesion);
     setMostrarInfo(true);
   };
   const cerrarInfo = () => {
+    setSesionSeleccionado(null);
     setMostrarInfo(false);
-  };
-
-  const modifAbrirInfo = () => {
-    setModificarInfo(true);
-  };
-  const modifCerrarInfo = () => {
-    setModificarInfo(false);
-  };
-
-  const abrirVentanaConfirmacionModif = () => {
-    setMostrarVentanaConfirmacionModif(true);
-  };
-
-  const cerrarVentanaConfirmacionModif = () => {
-    setMostrarVentanaConfirmacionModif(false);
-    setModificarInfo(false);
   };
 
   const abrePreguntaBorrado = () => {
@@ -95,13 +72,13 @@ export function Sesiones() {
       try {
         const ejercicios = await getEjercicios();
 
-        // Crear un mapeo de ID de ejercicio a nombres de ejercicios
-        const ejerciciosMap = {};
-        ejercicios.forEach((ejercicio) => {
-          ejerciciosMap[ejercicio.id] = ejercicio.name;
-        });
+        // // Crear un mapeo de ID de ejercicio a nombres de ejercicios
+        // const ejerciciosMap = {};
+        // ejercicios.forEach((ejercicio) => {
+        //   ejerciciosMap[ejercicio.id] = ejercicio.name;
+        // });
 
-        setEjerciciosMap(ejerciciosMap);
+        setEjerciciosMap(ejercicios);
       } catch (error) {
         console.error("Error al obtener ejercicios:", error);
       }
@@ -147,19 +124,11 @@ export function Sesiones() {
                 {sesion.exercise} | {sesion.rep} | {sesion.sets}
               </div>
               <div class="sesiones-botones">
-                <button onClick={abrirInfo}>Ver</button>
-                <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
-                <button onClick={modifAbrirInfo}>Modificar</button>
-                <Modificar
-                  modificarInfo={modificarInfo}
-                  modifCerrarInfo={modifCerrarInfo}
-                  abrirVentanaConfirmacionModif={abrirVentanaConfirmacionModif}
-                  mostrarVentanaConfirmacionModif={
-                    mostrarVentanaConfirmacionModif
-                  }
-                  cerrarVentanaConfirmacionModif={
-                    cerrarVentanaConfirmacionModif
-                  }
+                <button onClick={() => abrirInfo(sesion)}>Ver</button>
+                <Info
+                  mostrarInfo={mostrarInfo}
+                  cerrarInfo={cerrarInfo}
+                  sesionId={sesionSeleccionado}
                 />
                 <button onClick={abrePreguntaBorrado}>Borrar</button>
                 <Borrar

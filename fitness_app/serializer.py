@@ -22,7 +22,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
 
 class TrainingSessionSerializer(serializers.ModelSerializer):
-    exercises = ExerciseSerializer(many=False)
+    exercise = ExerciseSerializer(many=False)
 
     class Meta:
         model = TrainingSession

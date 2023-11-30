@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { getDetalleSesion } from "../../api/Sesiones";
-const Info = ({ mostrarInfo, cerrarInfo }) => {
+const Info = ({ mostrarInfo, cerrarInfo, sesionId }) => {
+  const [sesion, setSesion] = useState(null);
+  useEffect(() => {
+    const obtenerDetalleSesion = async () => {
+      try {
+        if (sesionId && sesionId.id) {
+          // Asegúrate de que ejercicioId sea un objeto con un campo 'id'
+          const idSesion = sesionId ? sesionId.id : null;
+          console.log("ID de la sesion:", idSesion);
+
+          const sesion = await getDetalleSesion(idSesion);
+          console.log("Datos de la sesion:", sesion);
+          setSesion(sesion);
+        }
+      } catch (error) {
+        console.error("Error al obtener detalle del sesion:", error);
+      }
+    };
+    if (mostrarInfo && sesionId) {
+      obtenerDetalleSesion();
+    }
+  }, [mostrarInfo, sesionId]);
   return (
     <>
       {mostrarInfo && (
@@ -32,6 +53,15 @@ const Info = ({ mostrarInfo, cerrarInfo }) => {
               <button onClick={cerrarInfo}>Volver</button>
               {/* Cierra la ventana y te da mensaje positivo pero no añade nada aún!!!! */}
             </div>
+            {sesion ? (
+              <>
+                <p>Nombre: {sesion.exercise.name}</p>
+                <p>reps: {sesion.rep}</p>
+                <p>sets: {sesion.sets}</p>
+              </>
+            ) : (
+              <p>Cargando información del sesion...</p>
+            )}
           </div>
         </div>
       )}
