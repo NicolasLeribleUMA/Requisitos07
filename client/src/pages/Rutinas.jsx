@@ -53,10 +53,12 @@ export function Rutinas() {
     setMostrarInfo(false);
   };
 
-  const modifAbrirInfo = () => {
+  const modifAbrirInfo = (actual) => {
+    setRutinaSeleccionado(actual);
     setModificarInfo(true);
   };
   const modifCerrarInfo = () => {
+    setRutinaSeleccionado(null);
     setModificarInfo(false);
   };
 
@@ -144,7 +146,7 @@ export function Rutinas() {
                 rutinaId={rutinaSeleccionado}
               />
 
-              <button onClick={modifAbrirInfo}>Modificar</button>
+              <button onClick={() => modifAbrirInfo(rutina)}>Modificar</button>
               <Modificar
                 modificarInfo={modificarInfo}
                 modifCerrarInfo={modifCerrarInfo}
@@ -153,6 +155,7 @@ export function Rutinas() {
                   mostrarVentanaConfirmacionModif
                 }
                 cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
+                rutinaActual={rutinaSeleccionado}
               />
               <button onClick={abrePreguntaBorrado}>Borrar</button>
               <Borrar
