@@ -6,6 +6,7 @@ import { getEjercicios } from "../api/Ejercicios";
 import Añadir from "../components/Sesiones/Añadir";
 import Info from "../components/Sesiones/Info";
 import Borrar from "../components/Sesiones/Borrar";
+import Navbar from "../components/Navigation";
 
 export function Sesiones() {
   const [sesiones, setSesiones] = useState([]);
@@ -116,14 +117,14 @@ export function Sesiones() {
     }
 
     return (
-      <ul class="sesiones-lista">
+      <ul className="sesiones-lista">
         {sesiones.map((sesion, index) => (
-          <li key={index} class="sesiones-item">
-            <div class="sesiones-info">
+          <li key={index} className="sesiones-item">
+            <div className="sesiones-info">
               <div>
                 {sesion.exercise.name} | {sesion.rep} | {sesion.sets}
               </div>
-              <div class="sesiones-botones">
+              <div className="sesiones-botones">
                 <button onClick={() => abrirInfo(sesion)}>Ver</button>
                 <Info
                   mostrarInfo={mostrarInfo}
@@ -147,35 +148,40 @@ export function Sesiones() {
                 />
               </div>
             </div>
-            <hr class="sesiones-linea" />
+            <hr className="sesiones-linea" />
           </li>
         ))}
       </ul>
     );
   };
   return (
-    <div class="sesiones-container">
-      <div class="sesiones-header">
-        <h2>SESIONES</h2>
-        <Link to="/home" class="sesiones-link-button">
-          Atrás
-        </Link>
-        <button class="sesiones-button" onClick={abrirVentana}>
-          Añadir sesión
-        </button>
-        <Añadir
-          mostrarVentana={mostrarVentana}
-          cerrarVentana={cerrarVentana}
-          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
-          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
-          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
-        />
+    <body>
+      <Navbar/>
+
+      <div className="sesiones-container">
+        <div className="sesiones-header">
+          <h2>SESIONES</h2>
+          <Link to="/home" className="sesiones-link-button">
+            Atrás
+          </Link>
+          <button className="sesiones-button" onClick={abrirVentana}>
+            Añadir sesión
+          </button>
+          <Añadir
+            mostrarVentana={mostrarVentana}
+            cerrarVentana={cerrarVentana}
+            abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+            mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+            cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+          />
+        </div>
+        <div className="sesiones-info-header">
+          <strong>Ejercicios</strong> | <strong>Repeticiones</strong> |{" "}
+          <strong>Series</strong>
+        </div>
+        {renderSesiones()}
       </div>
-      <div class="sesiones-info-header">
-        <strong>Ejercicios</strong> | <strong>Repeticiones</strong> |{" "}
-        <strong>Series</strong>
-      </div>
-      {renderSesiones()}
-    </div>
+
+    </body>
   );
 }

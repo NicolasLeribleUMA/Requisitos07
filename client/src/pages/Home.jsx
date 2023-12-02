@@ -1,10 +1,14 @@
 import React from 'react';
 import '../css/Home.css';
 import {Link} from 'react-router-dom'
+import Navbar from "../components/Navigation";
+
 export function Home() {
   return (
+    <body>
+      <Navbar/>
+    
     <div className="home-container">
-      <h2 className="home-title">FITNESS WELL-BEING</h2>
       <nav className="home-nav">
         <div>
           <button className="home-button">
@@ -28,5 +32,7 @@ export function Home() {
         </div>
       </nav>
     </div>
+
+    </body>
   );
 }

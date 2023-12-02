@@ -6,6 +6,7 @@ import Asignar from "../components/Clientes/Asignar";
 import Borrar from "../components/Clientes/Borrar";
 import Modificar from "../components/Clientes/Modificar";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navigation";
 
 const listaDeClientes = [
   { cliente: "Pepito" },
@@ -106,71 +107,76 @@ export function Clientes() {
   }
 
   return (
-    <div class="clientes-container">
-      <div class="clientes-header">
-        <h2>CLIENTES</h2>
-        <Link to="/home" class="clientes-link-button">
-          Atrás
-        </Link>
-      </div>
+    <body>
+      <Navbar/>
 
-      {/* Grid para mostrar los ejercicios */}
-      <div class="clientes-grid">
-        {listaDeClientes.map((ejercicio, index) => (
-          <div key={index} class="clientes-nombre">
-            {/* <div>
-          <strong>{ejercicio.nombre}</strong>
-        </div> */}
-            <div>{ejercicio.cliente}</div>
-            <div class="clientes-info">
-              <button onClick={abrirInfo}>Ver</button>
-              <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
+      <div className="clientes-container">
+        <div className="clientes-header">
+          <h2>CLIENTES</h2>
+          <Link to="/home" className="clientes-link-button">
+            Atrás
+          </Link>
+        </div>
 
-              <button onClick={modifAbrirInfo}>Modificar</button>
-              <Modificar
-                modificarInfo={modificarInfo}
-                modifCerrarInfo={modifCerrarInfo}
-                abrirVentanaConfirmacionModif={abrirVentanaConfirmacionModif}
-                mostrarVentanaConfirmacionModif={
-                  mostrarVentanaConfirmacionModif
-                }
-                cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
-              />
-              <button onClick={abrePreguntaBorrado}>Borrar</button>
-              <Borrar
-                preguntaBorrado={preguntaBorrado}
-                cierraPreguntaBorrado={cierraPreguntaBorrado}
-                abrirVentanaConfirmacionBorrado={
-                  abrirVentanaConfirmacionBorrado
-                }
-                mostrarVentanaConfirmacionBorrado={
-                  mostrarVentanaConfirmacionBorrado
-                }
-                cerrarVentanaConfirmacionBorrado={
-                  cerrarVentanaConfirmacionBorrado
-                }
-              />
-              <button onClick={abrirVentanaClientes}>
-                Asignar entrenamiento
-              </button>
-              <Asignar
-                abrirVentanaClientes={abrirVentanaClientes}
-                cerrarVentanaClientes={cerrarVentanaClientes}
-                abrirVentanaConfirmacionClientes={
-                  abrirVentanaConfirmacionClientes
-                }
-                cerrarVentanaConfirmacionClientes={
-                  cerrarVentanaConfirmacionClientes
-                }
-                asignarClientes={asignarClientes}
-                mostrarVentanaConfirmacionClientes={
-                  mostrarVentanaConfirmacionClientes
-                }
-              />
+        {/* Grid para mostrar los ejercicios */}
+        <div className="clientes-grid">
+          {listaDeClientes.map((ejercicio, index) => (
+            <div key={index} className="clientes-nombre">
+              {/* <div>
+            <strong>{ejercicio.nombre}</strong>
+          </div> */}
+              <div>{ejercicio.cliente}</div>
+              <div className="clientes-info">
+                <button onClick={abrirInfo}>Ver</button>
+                <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
+
+                <button onClick={modifAbrirInfo}>Modificar</button>
+                <Modificar
+                  modificarInfo={modificarInfo}
+                  modifCerrarInfo={modifCerrarInfo}
+                  abrirVentanaConfirmacionModif={abrirVentanaConfirmacionModif}
+                  mostrarVentanaConfirmacionModif={
+                    mostrarVentanaConfirmacionModif
+                  }
+                  cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
+                />
+                <button onClick={abrePreguntaBorrado}>Borrar</button>
+                <Borrar
+                  preguntaBorrado={preguntaBorrado}
+                  cierraPreguntaBorrado={cierraPreguntaBorrado}
+                  abrirVentanaConfirmacionBorrado={
+                    abrirVentanaConfirmacionBorrado
+                  }
+                  mostrarVentanaConfirmacionBorrado={
+                    mostrarVentanaConfirmacionBorrado
+                  }
+                  cerrarVentanaConfirmacionBorrado={
+                    cerrarVentanaConfirmacionBorrado
+                  }
+                />
+                <button onClick={abrirVentanaClientes}>
+                  Asignar entrenamiento
+                </button>
+                <Asignar
+                  abrirVentanaClientes={abrirVentanaClientes}
+                  cerrarVentanaClientes={cerrarVentanaClientes}
+                  abrirVentanaConfirmacionClientes={
+                    abrirVentanaConfirmacionClientes
+                  }
+                  cerrarVentanaConfirmacionClientes={
+                    cerrarVentanaConfirmacionClientes
+                  }
+                  asignarClientes={asignarClientes}
+                  mostrarVentanaConfirmacionClientes={
+                    mostrarVentanaConfirmacionClientes
+                  }
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
     </div>
+
+    </body>
   );
 }

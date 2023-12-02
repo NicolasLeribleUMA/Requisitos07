@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { getRutinas } from "../api/Rutinas";
 import { getSesiones } from "../api/Sesiones";
 import "../css/Rutinas.css";
+import Navbar from "../components/Navigation";
+
 
 export function Rutinas() {
   const [rutinas, setRutinas] = useState([]);
@@ -131,14 +133,14 @@ export function Rutinas() {
     }
 
     return (
-      <div class="rutinas-grid">
+      <div className="rutinas-grid">
         {rutinas.map((rutina, index) => (
-          <div key={index} class="rutinas-ejercicio">
+          <div key={index} className="rutinas-ejercicio">
             <div>
               <strong>{rutina.objective}</strong>
             </div>
 
-            <div class="rutinas-ejercicio-info">
+            <div className="rutinas-ejercicio-info">
               <button onClick={() => abrirInfo(rutina)}>Ver</button>
               <Info
                 mostrarInfo={mostrarInfo}
@@ -179,24 +181,29 @@ export function Rutinas() {
     );
   };
   return (
-    <div class="rutinas-container">
-      <div class="rutinas-header">
-        <h2>RUTINAS</h2>
-        <Link to="/home" class="rutinas-link-button">
-          Atrás
-        </Link>
-        <button class="rutinas-button" onClick={abrirVentana}>
-          Añadir rutina
-        </button>
-        <Añadir
-          mostrarVentana={mostrarVentana}
-          cerrarVentana={cerrarVentana}
-          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
-          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
-          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
-        />
+    <body>
+      <Navbar/>
+
+      <div className="rutinas-container">
+        <div className="rutinas-header">
+          <h2>RUTINAS</h2>
+          <Link to="/home" className="rutinas-link-button">
+            Atrás
+          </Link>
+          <button className="rutinas-button" onClick={abrirVentana}>
+            Añadir rutina
+          </button>
+          <Añadir
+            mostrarVentana={mostrarVentana}
+            cerrarVentana={cerrarVentana}
+            abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+            mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+            cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+          />
+        </div>
+        {renderRutinas()}
       </div>
-      {renderRutinas()}
-    </div>
+
+    </body>
   );
 }

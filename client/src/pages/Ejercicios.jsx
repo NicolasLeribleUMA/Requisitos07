@@ -6,6 +6,8 @@ import Añadir from "../components/Ejercicios/Añadir";
 import Info from "../components/Ejercicios/Info";
 import Modificar from "../components/Ejercicios/Modificar";
 import Borrar from "../components/Ejercicios/Borrar";
+import Navbar from "../components/Navigation";
+
 
 export function Ejercicios() {
   const [ejercicios, setEjercicios] = useState([]);
@@ -110,14 +112,14 @@ export function Ejercicios() {
     }
 
     return (
-      <ul class="ejercicios-lista">
+      <ul className="ejercicios-lista">
         {ejercicios.map((ejercicio, index) => (
-          <li key={index} class="ejercicio-item">
-            <div class="ejercicio-info">
+          <li key={index} className="ejercicio-item">
+            <div className="ejercicio-info">
               {ejercicio.name} | {ejercicio.type} |{" "}
               {ejercicio.isPrivate ? "Privado" : "Público"}
             </div>
-            <div class="ejercicios-botones">
+            <div className="ejercicios-botones">
               <button onClick={() => abrirInfo(ejercicio)}>Ver</button>
               <Info
                 mostrarInfo={mostrarInfo}
@@ -154,35 +156,39 @@ export function Ejercicios() {
                 ejercicioID={ejercicio.id}
               />
             </div>
-            <hr class="ejercicios-linea" />
+            <hr className="ejercicios-linea" />
           </li>
         ))}
       </ul>
     );
   };
   return (
-    <div class="ejercicios-container">
-      <div class="ejercicios-header">
-        <h2>EJERCICIOS</h2>
-        <Link to="/home" class="ejercicios-link-button">
-          Atrás
-        </Link>
-        <button class="ejercicios-button" onClick={abrirVentana}>
-          Añadir ejercicio
-        </button>
-        <Añadir
-          mostrarVentana={mostrarVentana}
-          cerrarVentana={cerrarVentana}
-          abrirVentanaConfirmacion={abrirVentanaConfirmacion}
-          mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
-          cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
-        />
+    <body>
+      <Navbar/>
+
+      <div className="ejercicios-container">
+        <div className="ejercicios-header">
+          <h2>EJERCICIOS</h2>
+          <Link to="/home" className="ejercicios-link-button">
+            Atrás
+          </Link>
+          <button className="ejercicios-button" onClick={abrirVentana}>
+            Añadir ejercicio
+          </button>
+          <Añadir
+            mostrarVentana={mostrarVentana}
+            cerrarVentana={cerrarVentana}
+            abrirVentanaConfirmacion={abrirVentanaConfirmacion}
+            mostrarVentanaConfirmacion={mostrarVentanaConfirmacion}
+            cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
+          />
+        </div>
+        <div className="ejercicios-info-header">
+          <strong>Nombre</strong> | <strong>Tipo</strong> |{" "}
+          <strong>Visibilidad</strong>
+        </div>
+        {renderEjercicios()}
       </div>
-      <div class="ejercicios-info-header">
-        <strong>Nombre</strong> | <strong>Tipo</strong> |{" "}
-        <strong>Visibilidad</strong>
-      </div>
-      {renderEjercicios()}
-    </div>
+    </body>
   );
 }
