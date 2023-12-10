@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'grupo07DB',
         'USER': 'grupo07',
         'PASSWORD': 'FjLWM6DNk6TJDzfV',
-        'HOST':'database-1.cugyzf4vivsu.eu-central-1.rds.amazonaws.com',
+        'HOST':'database-2.cugyzf4vivsu.eu-central-1.rds.amazonaws.com',
     }
 }
 
