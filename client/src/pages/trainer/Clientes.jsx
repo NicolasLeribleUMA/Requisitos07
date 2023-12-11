@@ -1,12 +1,12 @@
-import "../css/Clientes.css";
+import "../../css/Clientes.css";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import Info from "../components/Clientes/Info";
-import Asignar from "../components/Clientes/Asignar";
-import Borrar from "../components/Clientes/Borrar";
-import Modificar from "../components/Clientes/Modificar";
+import Info from "../../components/Clientes/Info";
+import Asignar from "../../components/Clientes/Asignar";
+import Borrar from "../../components/Clientes/Borrar";
+import Modificar from "../../components/Clientes/Modificar";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navigation";
+import Navbar from "../../components/Navigation";
 
 const listaDeClientes = [
   { cliente: "Pepito" },
@@ -113,7 +113,7 @@ export function Clientes() {
       <div className="clientes-container">
         <div className="clientes-header">
           <h2>CLIENTES</h2>
-          <Link to="/home" className="clientes-link-button">
+          <Link to="/entrenador/home" className="clientes-link-button">
             Atrás
           </Link>
         </div>

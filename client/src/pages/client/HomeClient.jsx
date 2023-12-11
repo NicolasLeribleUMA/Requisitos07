@@ -1,14 +1,15 @@
 import React from 'react';
-import '../css/Home.css';
+import '../../css/Home.css';
 import {Link} from 'react-router-dom'
-import Navbar from "../components/Navigation";
+import Navbar from "../../components/Navigation";
 
-export function Home() {
+export function HomeClient() {
   return (
     <body>
       <Navbar/>
     
     <div className="home-container">
+      <h1>MAIN DE CLIENTE</h1>
       <nav className="home-nav">
         <div>
           <button className="home-button">

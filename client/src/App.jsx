@@ -1,21 +1,27 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { Login } from "./pages/Login"
-import { Home } from "./pages/Home"
-import { Ejercicios } from "./pages/Ejercicios"
-import { Rutinas } from './pages/Rutinas.jsx'
-import { Sesiones } from './pages/Sesiones.jsx'
-import { Clientes } from './pages/Clientes.jsx'
+import { Login } from "./pages/trainer/Login.jsx"
+import { Home } from "./pages/trainer/Home.jsx"
+import { Ejercicios } from "./pages/trainer/Ejercicios.jsx"
+import { Rutinas } from './pages/trainer/Rutinas.jsx'
+import { Sesiones } from './pages/trainer/Sesiones.jsx'
+import { Clientes } from './pages/trainer/Clientes.jsx'
+import { LoginClient } from "./pages/client/LoginClient.jsx"
+import { HomeClient } from "./pages/client/HomeClient.jsx"
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/ejercicios" element={<Ejercicios />} />
-        <Route path="/rutinas" element={<Rutinas />} />
-        <Route path="/sesiones" element={<Sesiones />} />
-         <Route path="/clientes" element={<Clientes />} />
+        <Route path="/" element={<Navigate to="/entrenador/login" />} />
+
+        <Route path="/entrenador/login" element={<Login />} />
+        <Route path="/entrenador/home" element={<Home />} />
+        <Route path="/entrenador/ejercicios" element={<Ejercicios />} />
+        <Route path="/entrenador/rutinas" element={<Rutinas />} />
+        <Route path="/entrenador/sesiones" element={<Sesiones />} />
+        <Route path="/entrenador/clientes" element={<Clientes />} />
+
+        <Route path="/cliente/login" element={<LoginClient/>} />
+        <Route path="/cliente/home" element={<HomeClient/>} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/Login.css";
+import "../../css/Login.css";
 
-export function Login() {
+export function LoginClient() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export function Login() {
         console.log("suario:", responseData.username);
 
         // Realizar acciones adicionales, como redireccionar a la página principal
-        navigate("/home");
+        navigate("/cliente/home");
         // fetchUserData();
       } else {
         console.error("Error de autenticación:", response.statusText);
@@ -69,7 +69,7 @@ export function Login() {
 
   return (
     <div className="login-container">
-      <h2 className="login-title">Login</h2>
+      <h2 className="login-title">Login Cliente</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="login-label">
           Nombre de usuario:

@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
+import Info from "../../components/Rutinas/Info";
+import Borrar from "../../components/Rutinas/Borrar";
+import Modificar from "../../components/Rutinas/Modificar";
+import Añadir from "../../components/Rutinas/Añadir";
 import { Link } from "react-router-dom";
-import { getEjercicios } from "../api/Ejercicios";
-import "../css/Ejercicios.css";
-import Añadir from "../components/Ejercicios/Añadir";
-import Info from "../components/Ejercicios/Info";
-import Modificar from "../components/Ejercicios/Modificar";
-import Borrar from "../components/Ejercicios/Borrar";
-import Navbar from "../components/Navigation";
+import { getRutinas } from "../../api/Rutinas";
+import { getSesiones } from "../../api/Sesiones";
+import "../../css/Rutinas.css";
+import Navbar from "../../components/Navigation";
 
 
-export function Ejercicios() {
-  const [ejercicios, setEjercicios] = useState([]);
+export function Rutinas() {
+  const [rutinas, setRutinas] = useState([]);
+  const [sesiones, setSesiones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(null);
+
+  const [rutinaSeleccionado, setRutinaSeleccionado] = useState(null);
+
   const [mostrarVentana, setMostrarVentana] = useState(false);
   const [mostrarVentanaConfirmacion, setMostrarVentanaConfirmacion] =
     useState(false);
@@ -26,7 +30,6 @@ export function Ejercicios() {
     mostrarVentanaConfirmacionBorrado,
     setMostrarVentanaConfirmacionBorrado,
   ] = useState(false);
-
   const abrirVentana = () => {
     setMostrarVentana(true);
   };
@@ -43,21 +46,21 @@ export function Ejercicios() {
     setMostrarVentana(false);
   };
 
-  const abrirInfo = (ejercicio) => {
-    setEjercicioSeleccionado(ejercicio);
+  const abrirInfo = (irutina) => {
+    setRutinaSeleccionado(irutina);
     setMostrarInfo(true);
   };
   const cerrarInfo = () => {
-    setEjercicioSeleccionado(null);
+    setRutinaSeleccionado(null);
     setMostrarInfo(false);
   };
 
   const modifAbrirInfo = (actual) => {
-    setEjercicioSeleccionado(actual);
+    setRutinaSeleccionado(actual);
     setModificarInfo(true);
   };
   const modifCerrarInfo = () => {
-    setEjercicioSeleccionado(null);
+    setRutinaSeleccionado(null);
     setModificarInfo(false);
   };
 
@@ -85,13 +88,31 @@ export function Ejercicios() {
     setMostrarVentanaConfirmacionBorrado(false);
     setPreguntaBorrado(false);
   };
+  useEffect(() => {
+    // Obtener la lista de ejercicios al cargar el componente
+    const fetchRutinas = async () => {
+      try {
+        const rutinas = await getRutinas();
+
+        setRutinas(rutinas);
+      } catch (error) {
+        console.error("Error al obtener rutinas:", error);
+      }
+    };
+
+    fetchRutinas();
+  }, []);
 
   useEffect(() => {
     // Llamada a la API al montar el componente
-    const fetchEjercicios = async () => {
+    const fetchSesiones = async () => {
       try {
-        const data = await getEjercicios();
-        setEjercicios(data);
+        const data = await getSesiones();
+        // const sesionesConNombre = data.map((sesion) => ({
+        //   ...sesion,
+        //   exercise: ejerciciosMap[sesion.exercise],
+        // }));
+        setSesiones(data);
       } catch (error) {
         setError(error.message || "Error al obtener datos de la API");
       } finally {
@@ -99,12 +120,12 @@ export function Ejercicios() {
       }
     };
 
-    fetchEjercicios();
+    fetchSesiones();
   }, []);
 
-  const renderEjercicios = () => {
+  const renderRutinas = () => {
     if (loading) {
-      return <p>Cargando ejercicios...</p>;
+      return <p>Cargando rutinas...</p>;
     }
 
     if (error) {
@@ -112,24 +133,22 @@ export function Ejercicios() {
     }
 
     return (
-      <ul className="ejercicios-lista">
-        {ejercicios.map((ejercicio, index) => (
-          <li key={index} className="ejercicio-item">
-            <div className="ejercicio-info">
-              {ejercicio.name} | {ejercicio.type} |{" "}
-              {ejercicio.isPrivate ? "Privado" : "Público"}
+      <div className="rutinas-grid">
+        {rutinas.map((rutina, index) => (
+          <div key={index} className="rutinas-ejercicio">
+            <div>
+              <strong>{rutina.objective}</strong>
             </div>
-            <div className="ejercicios-botones">
-              <button onClick={() => abrirInfo(ejercicio)}>Ver</button>
+
+            <div className="rutinas-ejercicio-info">
+              <button onClick={() => abrirInfo(rutina)}>Ver</button>
               <Info
                 mostrarInfo={mostrarInfo}
                 cerrarInfo={cerrarInfo}
-                ejercicioId={ejercicioSeleccionado}
+                rutinaId={rutinaSeleccionado}
               />
-              <button onClick={() => modifAbrirInfo(ejercicio)}>
-                Modificar
-              </button>
 
+              <button onClick={() => modifAbrirInfo(rutina)}>Modificar</button>
               <Modificar
                 modificarInfo={modificarInfo}
                 modifCerrarInfo={modifCerrarInfo}
@@ -138,7 +157,7 @@ export function Ejercicios() {
                   mostrarVentanaConfirmacionModif
                 }
                 cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
-                ejercicioActual={ejercicioSeleccionado}
+                rutinaActual={rutinaSeleccionado}
               />
               <button onClick={abrePreguntaBorrado}>Borrar</button>
               <Borrar
@@ -153,27 +172,26 @@ export function Ejercicios() {
                 cerrarVentanaConfirmacionBorrado={
                   cerrarVentanaConfirmacionBorrado
                 }
-                ejercicioID={ejercicio.id}
+                rutinaID={rutina.id}
               />
             </div>
-            <hr className="ejercicios-linea" />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     );
   };
   return (
     <body>
       <Navbar/>
 
-      <div className="ejercicios-container">
-        <div className="ejercicios-header">
-          <h2>EJERCICIOS</h2>
-          <Link to="/home" className="ejercicios-link-button">
+      <div className="rutinas-container">
+        <div className="rutinas-header">
+          <h2>RUTINAS</h2>
+          <Link to="/entrenador/home" className="rutinas-link-button">
             Atrás
           </Link>
-          <button className="ejercicios-button" onClick={abrirVentana}>
-            Añadir ejercicio
+          <button className="rutinas-button" onClick={abrirVentana}>
+            Añadir rutina
           </button>
           <Añadir
             mostrarVentana={mostrarVentana}
@@ -183,12 +201,9 @@ export function Ejercicios() {
             cerrarVentanaConfirmacion={cerrarVentanaConfirmacion}
           />
         </div>
-        <div className="ejercicios-info-header">
-          <strong>Nombre</strong> | <strong>Tipo</strong> |{" "}
-          <strong>Visibilidad</strong>
-        </div>
-        {renderEjercicios()}
+        {renderRutinas()}
       </div>
+
     </body>
   );
 }

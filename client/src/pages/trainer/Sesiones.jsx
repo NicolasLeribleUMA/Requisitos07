@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/Sesiones.css";
-import { getSesiones } from "../api/Sesiones";
-import { getEjercicios } from "../api/Ejercicios";
-import Añadir from "../components/Sesiones/Añadir";
-import Info from "../components/Sesiones/Info";
-import Borrar from "../components/Sesiones/Borrar";
-import Navbar from "../components/Navigation";
+import "../../css/Sesiones.css";
+import { getSesiones } from "../../api/Sesiones";
+import { getEjercicios } from "../../api/Ejercicios";
+import Añadir from "../../components/Sesiones/Añadir";
+import Info from "../../components/Sesiones/Info";
+import Borrar from "../../components/Sesiones/Borrar";
+import Navbar from "../../components/Navigation";
 
 export function Sesiones() {
   const [sesiones, setSesiones] = useState([]);
@@ -161,7 +161,7 @@ export function Sesiones() {
       <div className="sesiones-container">
         <div className="sesiones-header">
           <h2>SESIONES</h2>
-          <Link to="/home" className="sesiones-link-button">
+          <Link to="/entrenador/home" className="sesiones-link-button">
             Atrás
           </Link>
           <button className="sesiones-button" onClick={abrirVentana}>
