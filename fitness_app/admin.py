@@ -6,6 +6,10 @@ from .models import *
 class ClientAdmin(admin.ModelAdmin):
     fieldsets = [
         ('User', {'fields': ['user']}),
+        ('Weight', {'fields': ['weight']}),
+        ('IMC', {'fields': ['imc']}),
+        ('Measure Date', {'fields': ['measureDate']}),
+        ('Objective', {'fields': ['objective']}),
         ('Trainer', {'fields': ['trainer']}),
     ]
 
@@ -50,8 +54,17 @@ class ExerciseAdmin(admin.ModelAdmin):
     inlines = [RatingInLine]
 
 
+class AppointmentAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Date', {'fields': ['date']}),
+        ('Client', {'fields': ['client']}),
+        ('Trainer', {'fields': ['trainer']}),
+    ]
+
+
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Trainer, TrainerAdmin)
 admin.site.register(Routine, RoutineAdmin)
 admin.site.register(TrainingSession, TrainingSessionAdmin)
 admin.site.register(Exercise, ExerciseAdmin)
+admin.site.register(Appointment, AppointmentAdmin)
