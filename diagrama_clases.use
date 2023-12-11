@@ -1,0 +1,94 @@
+model FitnessWellBeing
+
+class User
+attributes
+    username : String
+    first_name : String
+    last_name : String
+end
+
+class Trainer < User
+attributes
+    category : String
+end
+
+class Client < User
+attributes
+    weight : Integer
+    imc : Integer
+    measureDate : String
+    objective : String
+end
+
+association AssignedClient
+between
+    Trainer [1]
+    Client [*]
+end
+
+enum ExerciseType {General, Pecho, Espalda, Brazos, Hombros, Piernas}
+
+class Exercise
+attributes
+    name : String
+    desc : String
+    type : ExerciseType
+    videoURL : String
+    isPrivate : Boolean
+end
+
+association CreatedBy
+between
+    Trainer [1]
+    Exercise [*]
+end
+
+class TrainingSession
+attributes
+    rep : Integer
+    sets : Integer
+end
+
+association SessionOf
+between
+    TrainingSession [0..1]
+    Exercise [1]
+end
+
+association SessionsAsigned
+between
+    Client [0..1]
+    TrainingSession [0..1]
+end
+
+class Routine
+attributes
+    objective : String
+end
+
+association AssembledBy
+between
+    Trainer [1]
+    Routine [*]
+end
+
+association AssignedTo
+between
+    Client [0..1]
+    Routine [0..1]
+end
+
+association SessionIncludedIn
+between
+    Routine [1]
+    TrainingSession [1..*]
+end
+
+associationclass Rating
+between
+    Client [1]
+    Exercise [1]
+attributes
+    rating : Boolean
+    comment : String
+end
