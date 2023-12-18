@@ -8,7 +8,7 @@ import { Clientes } from "./pages/trainer/Clientes.jsx";
 import Entrenamiento from "./pages/client/Entrenamiento.jsx";
 import { HomeClient } from "./pages/client/HomeClient.jsx";
 import { Profile } from "./pages/Perfil.jsx";
-
+import VerEntrenamiento from "./pages/trainer/VerEntrenamiento.jsx";
 import CitaClient from "./pages/client/CitaClient.jsx";
 import Citas from "./pages/trainer/Citas.jsx";
 function App() {
@@ -25,7 +25,10 @@ function App() {
         <Route path="/entrenador/sesiones" element={<Sesiones />} />
         <Route path="/entrenador/clientes" element={<Clientes />} />
         <Route path="/entrenador/citas" element={<Citas />} />
-        <Route path="/entrenador/entrenamiento" element={<Entrenamiento />} />
+        <Route
+          path="/entrenador/entrenamiento/:clienteId"
+          element={<VerEntrenamiento />}
+        />
 
         <Route path="/cliente/home" element={<HomeClient />} />
         <Route path="/cliente/cita" element={<CitaClient />} />

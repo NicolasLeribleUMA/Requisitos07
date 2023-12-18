@@ -1,21 +1,16 @@
 import "../../css/Clientes.css";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Info from "../../components/Clientes/Info";
 import Asignar from "../../components/Clientes/Asignar";
 import Borrar from "../../components/Clientes/Borrar";
 import Modificar from "../../components/Clientes/Modificar";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navigation";
-
-const listaDeClientes = [
-  { cliente: "Pepito" },
-  { cliente: "Maria" },
-  { cliente: "Estefania" },
-  // ... otros ejercicios
-];
+import { getClientes } from "../../api/Clientes";
 
 export function Clientes() {
+  const [clientes, setClientes] = useState([]);
   const [mostrarInfo, setMostrarInfo] = useState(false);
   const [modificarInfo, setModificarInfo] = useState(false);
   const [mostrarVentanaConfirmacionModif, setMostrarVentanaConfirmacionModif] =
@@ -87,28 +82,23 @@ export function Clientes() {
     setAsignarClientes(false);
   };
 
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE AÑADIR EJERCICIO (Ejercicio añadido)*/
-  }
-  {
-    /* VENTANA DE VER EJERCICIO */
-  }
-  {
-    /* MODIFICAR DE VER EJERCICIO */
-  }
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE MODIFICAR EJERCICIO (Ejercicio modificado)*/
-  }
-  {
-    /* VENTANA / pop-up PARA PREGUNTAR SI ESTAS SEGURO DE ELIMINAR EJERCICIO */
-  }
-  {
-    /* WIP: VENTANA DE CONFIRMACION DE ELIMINAR EJERCICIO (Ejercicio eliminado)*/
-  }
+  useEffect(() => {
+    const fetchClientes = async () => {
+      try {
+        // Llama a tu función para obtener clientes desde la base de datos
+        const data = await getClientes();
+        setClientes(data);
+      } catch (error) {
+        console.error("Error al obtener clientes:", error);
+      }
+    };
+
+    fetchClientes();
+  }, []);
 
   return (
     <body>
-      <Navbar/>
+      <Navbar />
 
       <div className="clientes-container">
         <div className="clientes-header">
@@ -120,12 +110,12 @@ export function Clientes() {
 
         {/* Grid para mostrar los ejercicios */}
         <div className="clientes-grid">
-          {listaDeClientes.map((ejercicio, index) => (
+          {clientes.map((cliente, index) => (
             <div key={index} className="clientes-nombre">
               {/* <div>
             <strong>{ejercicio.nombre}</strong>
           </div> */}
-              <div>{ejercicio.cliente}</div>
+              <div>{cliente.user}</div>
               <div className="clientes-info">
                 <button onClick={abrirInfo}>Ver</button>
                 <Info mostrarInfo={mostrarInfo} cerrarInfo={cerrarInfo} />
@@ -138,7 +128,9 @@ export function Clientes() {
                   mostrarVentanaConfirmacionModif={
                     mostrarVentanaConfirmacionModif
                   }
-                  cerrarVentanaConfirmacionModif={cerrarVentanaConfirmacionModif}
+                  cerrarVentanaConfirmacionModif={
+                    cerrarVentanaConfirmacionModif
+                  }
                 />
                 <button onClick={abrePreguntaBorrado}>Borrar</button>
                 <Borrar
@@ -172,16 +164,18 @@ export function Clientes() {
                   }
                 />
                 <button>
-                <Link to="/entrenador/entrenamiento" className="entrenador-link-button">
+                  <Link
+                    to={`/entrenador/entrenamiento/${cliente.id}`}
+                    className="entrenador-link-button"
+                  >
                     Ver entrenamiento
-                </Link>
+                  </Link>
                 </button>
               </div>
             </div>
           ))}
         </div>
-    </div>
-
+      </div>
     </body>
   );
 }
