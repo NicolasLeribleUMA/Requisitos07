@@ -10,6 +10,7 @@ import {
   EliminarCita,
   obtenerIDEntrenador,
 } from "../../api/Citas"; // Ajusta la ruta según tu estructura
+import { Link } from "react-router-dom"; // Assuming you're using react-router-dom
 
 const Citas = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -90,7 +91,16 @@ const Citas = () => {
   return (
     <div>
       <Navbar />
-      <h2>Citas Pendientes</h2>
+
+      <div className="clientes-container">
+        <div className="clientes-header">
+          <h2>CLIENTES</h2>
+          <Link to="/entrenador/home" className="clientes-link-button">
+            Atrás
+          </Link>
+        </div>
+
+        <h2 style={{ color: 'black' }}>Citas Pendientes</h2>
       {citasPendientes.map((cita) => (
         <div
           key={cita.id}
@@ -126,7 +136,7 @@ const Citas = () => {
         </div>
       ))}
 
-      <h2>Citas Aceptadas</h2>
+      <h2 style={{ color: 'black' }}>Citas Aceptadas</h2>
       {citasAceptadas.map((cita) => (
         <div
           key={cita.id}
@@ -134,6 +144,7 @@ const Citas = () => {
             border: "1px solid #ccc",
             padding: "10px",
             marginBottom: "10px",
+            color: "black",
           }}
         >
           <h3>{cita.user}</h3>
@@ -141,6 +152,7 @@ const Citas = () => {
           <p>Objetivo: {cita.objective}</p>
         </div>
       ))}
+    </div>
     </div>
   );
 };

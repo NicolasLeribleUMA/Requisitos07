@@ -34,6 +34,7 @@ class TrainingSessionAdmin(admin.ModelAdmin):
         ('Repetitions', {'fields': ['rep']}),
         ('Sets', {'fields': ['sets']}),
         ('Exercise', {'fields': ['exercise']}),
+        ('Client', {'fields': ['client']}),
     ]
 
 
