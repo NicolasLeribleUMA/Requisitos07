@@ -62,15 +62,17 @@ const Entrenamiento = () => {
     setShowPopup(true);
   };
 
-  const handleGuardarValoracion = () => {
+  const handleGuardarValoracion = async () => {
     // Lógica para guardar la valoración con comentarios y URL
     console.log("Guardando valoración...");
+    const client = await getCliente(4);
     const rating = {
-      'rating' : valoracion === 'true',
-      'comment' : comentarios,
-      'client' : getCliente(4),
-      'exercise' : selectedItem
+      'rating': valoracion === 'true' ? 1 : 0,
+      'comment': comentarios,
+      'client': client.id,
+      'exercise': selectedItem.exercise.id
     }
+    console.log(rating)
     addRating(rating);
     // Puedes realizar acciones adicionales aquí, como enviar los datos al servidor
     // y luego cerrar la ventana emergente
