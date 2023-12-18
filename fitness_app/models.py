@@ -49,6 +49,7 @@ class TrainingSession(models.Model):
     rep = models.IntegerField(default=0)
     sets = models.IntegerField(default=0)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    client = models.OneToOneField(Client, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.exercise.name}: {self.rep} repeticiones, {self.sets} series"
