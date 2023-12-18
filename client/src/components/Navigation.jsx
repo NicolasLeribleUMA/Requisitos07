@@ -5,6 +5,13 @@ const Navbar = () => {
     return (
       <header className="header">
         <a className="logo">Fitness Well-Being</a>
+
+        <nav className="navbar-notif">
+          <a href="#"><img src="assests/notification-bell.png" class="img-fluid"></img></a>
+          <a>Notificaciones</a>
+        </nav>
+              
+        
         <nav className="navbar">
         <a href="#"><b>usuario</b></a>
         </nav>
