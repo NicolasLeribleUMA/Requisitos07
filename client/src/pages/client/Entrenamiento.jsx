@@ -4,12 +4,17 @@ import Navbar from "../../components/Navigation";
 import { getRutinas } from "../../api/Rutinas"; // Ajusta la ruta según tu estructura
 import { getSesiones } from "../../api/Sesiones";
 import "./Entrenamiento.css"; // Archivo CSS para estilos
+import {
+  addRating
+} from "../../api/Rating";
+import {getCliente} from "../../api/Clientes.js"; // Ajusta la ruta según tu estructura
 
 const Entrenamiento = () => {
   const [rutinas, setRutinas] = useState([]);
   const [sesiones, setSesiones] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null); // Estado para el ítem seleccionado
   const [showPopup, setShowPopup] = useState(false); // Estado para mostrar/ocultar la ventana emergente
+  const [valoracion, setValoracion] = useState(false); // Estado para almacenar comentarios
   const [comentarios, setComentarios] = useState(""); // Estado para almacenar comentarios
   const [url, setURL] = useState(""); // Estado para almacenar la URL
   const [completado, setCompletado] = useState(false); // Estado para almacenar si se ha completado o no
@@ -60,7 +65,13 @@ const Entrenamiento = () => {
   const handleGuardarValoracion = () => {
     // Lógica para guardar la valoración con comentarios y URL
     console.log("Guardando valoración...");
-    //addCompletado(completado);
+    const rating = {
+      'rating' : valoracion === 'true',
+      'comment' : comentarios,
+      'client' : getCliente(4),
+      'exercise' : selectedItem
+    }
+    addRating(rating);
     // Puedes realizar acciones adicionales aquí, como enviar los datos al servidor
     // y luego cerrar la ventana emergente
     handleClosePopup();
@@ -103,9 +114,22 @@ const Entrenamiento = () => {
           <h3>
             {selectedItem ? "Progreso de la Rutina" : "Progreso de la Sesión"}
           </h3>
-          {/* Barra de progreso */}
-          <progress value="50" max="100"></progress>
-
+          <br/>
+          <label>
+            Valoración:
+            <input
+              type="radio"
+              value="true"
+              name="valoracion"
+              onChange={(e) => setValoracion(e.target.value)}
+            /> Bien
+            <input
+              type="radio"
+              value="false"
+              name="valoracion"
+              onChange={(e) => setValoracion(e.target.value)}
+            /> Mal
+          </label><br/>
           {/* Campos de texto para comentarios y URL */}
           <label>
             Comentarios:
@@ -115,7 +139,7 @@ const Entrenamiento = () => {
               onChange={(e) => setComentarios(e.target.value)}
             />
           </label>
-
+          <br/>
           <label>
             URL:
             <input
@@ -124,7 +148,7 @@ const Entrenamiento = () => {
               onChange={(e) => setURL(e.target.value)}
             />
           </label>
-
+            <br/>
           {/* Casillas de verificación para completado */}
           <div>
             <label>

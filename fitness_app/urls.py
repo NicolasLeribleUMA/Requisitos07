@@ -10,7 +10,7 @@ router.register(r'trainers', views.TrainerView, 'trainers')
 router.register(r'exercises', views.ExerciseView, 'exercises')
 router.register(r'sessions', views.TrainingSessionView, 'sessions')
 router.register(r'routines', views.RoutineView, 'routines')
-router.register(r'ratings', views.ClientView, 'ratings')
+router.register(r'ratings', views.RatingView, 'ratings')
 router.register(r'appointments', views.ClientView, 'appointments')
 
 urlpatterns = [

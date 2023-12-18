@@ -55,6 +55,15 @@ class ExerciseAdmin(admin.ModelAdmin):
     inlines = [RatingInLine]
 
 
+class RatingAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Rating', {'fields': ['rating']}),
+        ('Comment', {'fields': ['comment']}),
+        ('Client', {'fields': ['client']}),
+        ('Exercise', {'fields': ['exercise']}),
+    ]
+
+
 class AppointmentAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Date', {'fields': ['date']}),
@@ -68,4 +77,5 @@ admin.site.register(Trainer, TrainerAdmin)
 admin.site.register(Routine, RoutineAdmin)
 admin.site.register(TrainingSession, TrainingSessionAdmin)
 admin.site.register(Exercise, ExerciseAdmin)
+admin.site.register(Rating, RatingAdmin)
 admin.site.register(Appointment, AppointmentAdmin)

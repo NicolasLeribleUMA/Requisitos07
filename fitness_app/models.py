@@ -66,7 +66,7 @@ class Routine(models.Model):
 
 
 class Rating(models.Model):
-    rating = models.BooleanField
+    rating = models.BooleanField()
     comment = models.CharField(max_length=300)
     client = models.OneToOneField(Client, on_delete=models.CASCADE)
     exercise = models.OneToOneField(Exercise, on_delete=models.CASCADE)
