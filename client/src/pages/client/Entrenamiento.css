@@ -1,0 +1,35 @@
+/* Entrenamiento.css */
+.entrenamiento-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .entrenamiento-section {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Ajusta el ancho según tus necesidades */
+  }
+  
+  .rutina-item,
+  .sesion-item {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Otros estilos según tu preferencia */
+/* Estilos para la ventana emergente */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 999; /* Ajusta según sea necesario para que esté por encima del resto del contenido */
+  }
+    

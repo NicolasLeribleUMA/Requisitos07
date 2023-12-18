@@ -13,7 +13,7 @@ export function HomeClient() {
         <nav className="home-nav">
           <div>
             <button className="home-button">
-              <a href="/ejercicios">Ejercicios</a>
+              <a href="/cliente/entrenamiento">Entrenamiento</a>
             </button>
           </div>
           <div>

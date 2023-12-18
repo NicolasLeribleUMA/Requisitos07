@@ -9,6 +9,7 @@ import Citas from "./pages/trainer/Citas.jsx";
 import { LoginClient } from "./pages/client/LoginClient.jsx";
 import { HomeClient } from "./pages/client/HomeClient.jsx";
 import CitaClient from "./pages/client/CitaClient.jsx";
+import Entrenamiento from "./pages/client/Entrenamiento.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/cliente/login" element={<LoginClient />} />
         <Route path="/cliente/home" element={<HomeClient />} />
         <Route path="/cliente/cita" element={<CitaClient />} />
+        <Route path="/cliente/entrenamiento" element={<Entrenamiento />} />
       </Routes>
     </BrowserRouter>
   );
