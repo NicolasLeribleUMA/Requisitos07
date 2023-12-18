@@ -7,7 +7,7 @@ const Navbar = () => {
         <a href = "/entrenador/home" className="logo">Fitness Well-Being</a>
 
         <nav className="navbar-notif">
-          <a href="#"><img src="assests/notification-bell.png" class="img-fluid"></img></a>
+          <a href="/entrenador/citas"><img src="assests/notification-bell.png" class="img-fluid"></img></a>
           <a>Notificaciones</a>
         </nav>
               
