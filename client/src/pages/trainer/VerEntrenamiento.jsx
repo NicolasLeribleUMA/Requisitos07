@@ -31,6 +31,9 @@ const VerEntrenamiento = () => {
     <div>
       <Navbar />
       <h2>Entrenamiento del Cliente</h2>
+      <Link style={{textAlign:'right'}} to="/entrenador/home" className="entrenamiento-link-button">
+        Atrás
+      </Link>
 
       <div className="entrenamiento-container">
         {/* Valoración y Progreso */}
@@ -50,9 +53,7 @@ const VerEntrenamiento = () => {
         </div>
       </div>
 
-      <Link to="/entrenador/home" className="entrenamiento-link-button">
-        Atrás
-      </Link>
+     
     </div>
   );
 };
