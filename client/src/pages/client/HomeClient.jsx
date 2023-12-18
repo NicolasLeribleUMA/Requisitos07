@@ -18,21 +18,6 @@ export function HomeClient() {
           </div>
           <div>
             <button className="home-button">
-              <a href="/rutinas">Rutinas</a>
-            </button>
-          </div>
-          <div>
-            <button className="home-button">
-              <a href="/sesiones">Sesiones</a>
-            </button>
-          </div>
-          <div>
-            <button className="home-button">
-              <a href="/clientes">Clientes</a>
-            </button>
-          </div>
-          <div>
-            <button className="home-button">
               <a href="/cliente/cita">Citas</a>
             </button>
           </div>
