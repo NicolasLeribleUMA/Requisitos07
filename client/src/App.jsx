@@ -23,6 +23,7 @@ function App() {
         <Route path="/entrenador/sesiones" element={<Sesiones />} />
         <Route path="/entrenador/clientes" element={<Clientes />} />
         <Route path="/entrenador/citas" element={<Citas />} />
+        <Route path="/entrenador/entrenamiento" element={<Entrenamiento />} />
 
         <Route path="/cliente/login" element={<LoginClient />} />
         <Route path="/cliente/home" element={<HomeClient />} />
