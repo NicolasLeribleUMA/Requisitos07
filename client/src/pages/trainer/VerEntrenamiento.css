@@ -1,0 +1,20 @@
+/* Tu archivo CSS (por ejemplo, VerEntrenamiento.css) */
+.entrenamiento-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .valoracion-progreso-container {
+    width: 48%; /* O ajusta según tus necesidades */
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .cliente-info-container {
+    width: 48%; /* O ajusta según tus necesidades */
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
