@@ -12,6 +12,7 @@ const Entrenamiento = () => {
   const [showPopup, setShowPopup] = useState(false); // Estado para mostrar/ocultar la ventana emergente
   const [comentarios, setComentarios] = useState(""); // Estado para almacenar comentarios
   const [url, setURL] = useState(""); // Estado para almacenar la URL
+  const [completado, setCompletado] = useState(false); // Estado para almacenar si se ha completado o no
 
   useEffect(() => {
     // Obtener la información de rutinas y sesiones cuando se monta el componente
@@ -59,6 +60,7 @@ const Entrenamiento = () => {
   const handleGuardarValoracion = () => {
     // Lógica para guardar la valoración con comentarios y URL
     console.log("Guardando valoración...");
+    //addCompletado(completado);
     // Puedes realizar acciones adicionales aquí, como enviar los datos al servidor
     // y luego cerrar la ventana emergente
     handleClosePopup();
@@ -122,6 +124,28 @@ const Entrenamiento = () => {
               onChange={(e) => setURL(e.target.value)}
             />
           </label>
+
+          {/* Casillas de verificación para completado */}
+          <div>
+            <label>
+              Completado:
+              <input
+                type="checkbox"
+                checked={completado}
+                onChange={() => setCompletado(!completado)}
+              />
+              Sí
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={!completado}
+                onChange={() => setCompletado(!completado)}
+              />
+              No
+            </label>
+          </div>
 
           {/* Botón de guardar valoración */}
           <button onClick={handleGuardarValoracion}>Guardar Valoración</button>
