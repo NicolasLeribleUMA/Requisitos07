@@ -171,6 +171,11 @@ export function Clientes() {
                     mostrarVentanaConfirmacionClientes
                   }
                 />
+                <button>
+                <Link to="/entrenador/entrenamiento" className="entrenador-link-button">
+                    Ver entrenamiento
+                </Link>
+                </button>
               </div>
             </div>
           ))}
