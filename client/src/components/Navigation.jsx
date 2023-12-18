@@ -2,9 +2,12 @@ import "../css/Navigation.css";
 
 const Navbar = () => {
 
+    const homeURL = localStorage.getItem("isTrainer") === "true" ?
+        "/entrenador/home" : "/cliente/home"
+
     return (
       <header className="header">
-        <a href = "/entrenador/home" className="logo">Fitness Well-Being</a>
+        <a href = {homeURL} className="logo">Fitness Well-Being</a> :
 
         <nav className="navbar-notif">
           <a href="/entrenador/citas">🔔</a>
