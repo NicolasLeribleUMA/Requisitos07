@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../css/Login.css";
+import "../css/Login.css";
 
-export function LoginClient() {
+export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -26,11 +26,18 @@ export function LoginClient() {
         // Almacenar el token en el estado o en el almacenamiento local (puedes usar localStorage)
         localStorage.setItem("authToken", authToken);
         localStorage.setItem("username", responseData.username);
+        localStorage.setItem("isTrainer", responseData.isTrainer);
         console.log("Datos de usuario:", responseData);
-        console.log("suario:", responseData.username);
+        console.log("Usuario:", responseData.username);
 
         // Realizar acciones adicionales, como redireccionar a la página principal
-        navigate("/cliente/home");
+
+        if( localStorage.isTrainer==="true"){
+          navigate("/entrenador/home");
+        } else {
+          navigate("/cliente/home");
+        }
+
         // fetchUserData();
       } else {
         console.error("Error de autenticación:", response.statusText);
@@ -69,7 +76,7 @@ export function LoginClient() {
 
   return (
     <div className="login-container">
-      <h2 className="login-title">Login Cliente</h2>
+      <h2 className="login-title">Login Entrenador</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="login-label">
           Nombre de usuario:

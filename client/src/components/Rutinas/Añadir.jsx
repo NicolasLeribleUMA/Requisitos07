@@ -28,6 +28,7 @@ const Añadir = ({
   }, []);
   const handleAddSession = () => {
     // Puedes realizar alguna lógica aquí antes de agregar las sesiones
+    const selectedSesiones = sesiones;
     console.log("Sesiones seleccionadas:", selectedSesiones);
   };
 
