@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
       <header className="header">
-        <a href = {homeURL} className="logo">Fitness Well-Being</a> :
+        <a href = {homeURL} className="logo">Fitness Well-Being</a>
 
         <nav className="navbar-notif">
           <a href="/entrenador/citas">🔔</a>
