@@ -8,6 +8,8 @@ import { Clientes } from './pages/trainer/Clientes.jsx'
 import { HomeClient } from "./pages/client/HomeClient.jsx"
 import { Profile } from "./pages/Perfil.jsx"
 
+import CitaClient from "./pages/client/CitaClient.jsx";
+import Citas from "./pages/trainer/Citas.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -21,11 +23,13 @@ function App() {
         <Route path="/entrenador/rutinas" element={<Rutinas />} />
         <Route path="/entrenador/sesiones" element={<Sesiones />} />
         <Route path="/entrenador/clientes" element={<Clientes />} />
+        <Route path="/entrenador/citas" element={<Citas />} />
 
         <Route path="/cliente/home" element={<HomeClient/>} />
+        <Route path="/cliente/cita" element={<CitaClient />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

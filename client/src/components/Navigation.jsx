@@ -4,7 +4,14 @@ const Navbar = () => {
 
     return (
       <header className="header">
-        <a className="logo">Fitness Well-Being</a>
+        <a href = "/entrenador/home" className="logo">Fitness Well-Being</a>
+
+        <nav className="navbar-notif">
+          <a href="/entrenador/citas"><img src="assests/notification-bell.png" class="img-fluid"></img></a>
+          <a>Notificaciones</a>
+        </nav>
+              
+        
         <nav className="navbar">
         <a href="/perfil"><b>usuario</b></a>
         </nav>
