@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navigation";
 import { Link, useParams } from "react-router-dom";
 import { getCliente } from "../../api/Clientes";
+import { getRating } from "../../api/Rating";
 import "./VerEntrenamiento.css"; // Importa tu archivo CSS para estilos
 
 const VerEntrenamiento = () => {
   const { clienteId } = useParams();
   const [cliente, setCliente] = useState(null);
+  const [rating, setRating] = useState(null);
 
   useEffect(() => {
     const fetchCliente = async () => {
@@ -15,6 +17,8 @@ const VerEntrenamiento = () => {
         // Llama a tu función para obtener el cliente desde la base de datos
         const data = await getCliente(clienteId); // Ajusta según tu API
         setCliente(data);
+        const ratingData = await getRating(clienteId); // Ajusta según tu API
+        setRating(ratingData);
       } catch (error) {
         console.error("Error al obtener el cliente:", error);
       }
@@ -31,7 +35,11 @@ const VerEntrenamiento = () => {
     <div>
       <Navbar />
       <h2>Entrenamiento del Cliente</h2>
-      <Link style={{textAlign:'right'}} to="/entrenador/home" className="entrenamiento-link-button">
+      <Link
+        style={{ textAlign: "right" }}
+        to="/entrenador/home"
+        className="entrenamiento-link-button"
+      >
         Atrás
       </Link>
 
@@ -39,6 +47,8 @@ const VerEntrenamiento = () => {
         {/* Valoración y Progreso */}
         <div className="valoracion-progreso-container">
           <h3>Valoración y Progreso</h3>
+          {/* <p>Val: {rating.rating}</p>
+          <p>Comentario: {rating.comment}</p> */}
         </div>
 
         {/* Información del Cliente */}
@@ -52,8 +62,6 @@ const VerEntrenamiento = () => {
           {/* Otros detalles del cliente */}
         </div>
       </div>
-
-     
     </div>
   );
 };
